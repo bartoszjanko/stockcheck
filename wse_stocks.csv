@@ -1,0 +1,339 @@
+company_name,ticker,market,indices,industry
+11 BIT STUDIOS,11B,Główny Rynek,"GPWB-CENTR, WIG140, WIG-gry, WIGtechTR, CEEplus, WIG.GAMES5, mWIG40TR, WIG30TR, WIG30, WIG-Poland, mWIG40, WIG",Gry
+3R GAMES,3RG,Główny Rynek,"WIG-gry, WIG-Poland, WIG",Gry
+4MASS,4MS,Główny Rynek,"INNOVATOR, WIG-odzież, WIG-Poland, WIG",kosmetyki i chemia gospodarcza
+AB,ABE,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIG-Poland, mWIG40, WIG",komputery i elektronika
+AC,ACG,Główny Rynek,"WIG140, INNOVATOR, sWIG80TR, WIG-motoryzacja, WIG-Poland, sWIG80, WIG",części samochodowe
+ACTION,ACT,Główny Rynek,"WIG-Poland, WIG",komputery i elektronika
+AGORA,AGO,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, WIG-media, sWIG80, WIG",wydawnictwa
+AGROTON PUBLIC LIMITED,AGT,Główny Rynek,"WIG-CEE, WIG-Ukraine, WIG-spożywczy, WIG",produkcja rolna i rybołówstwo
+AGROTON PUBLIC LIMITED,AGT,Główny Rynek,"WIG-CEE, WIG-Ukraine, WIG-spożywczy, WIG",produkcja rolna i rybołówstwo
+AILLERON,ALL,Główny Rynek,"WIG140, WIGtechTR, sWIG80TR, WIG-Poland, WIG-informatyka, sWIG80, WIG",oprogramowanie
+AILLERON,ALL,Główny Rynek,"WIG140, WIGtechTR, sWIG80TR, WIG-Poland, WIG-informatyka, sWIG80, WIG",oprogramowanie
+AIRWAY MEDIX,AWM,Główny Rynek,"WIG-Poland, WIG",Sprzęt i Materiały Medyczne
+AIRWAY MEDIX,AWM,Główny Rynek,"WIG-Poland, WIG",Sprzęt i Materiały Medyczne
+ALIOR BANK,ALR,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, WIG.MS-FIN, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG-banki, WIG20, WIG",banki komercyjne
+ALIOR BANK,ALR,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, WIG.MS-FIN, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG-banki, WIG20, WIG",banki komercyjne
+ALLEGRO.EU S.A.,ALE,Główny Rynek,"WIG.MS-ECM, GPWB-CENTR, WIG140, CEEplus, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG20, WIG",Handel Internetowy
+ALLEGRO.EU S.A.,ALE,Główny Rynek,"WIG.MS-ECM, GPWB-CENTR, WIG140, CEEplus, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG20, WIG",Handel Internetowy
+ALTA,AAT,Główny Rynek,"WIG-Poland, WIG-nieruchomości, WIG",sprzedaż nieruchomości
+ALTA,AAT,Główny Rynek,"WIG-Poland, WIG-nieruchomości, WIG",sprzedaż nieruchomości
+ALTUS,ALI,Główny Rynek,"WIG-Poland, WIG",zarządzanie aktywami
+ALTUS,ALI,Główny Rynek,"WIG-Poland, WIG",zarządzanie aktywami
+AMBRA,AMB,Główny Rynek,"WIGdivplus, WIG140, sWIG80TR, WIGdiv, WIG-Poland, WIG-spożywczy, sWIG80, WIG",napoje
+AMBRA,AMB,Główny Rynek,"WIGdivplus, WIG140, sWIG80TR, WIGdiv, WIG-Poland, WIG-spożywczy, sWIG80, WIG",napoje
+AMICA,AMC,Główny Rynek,"WIGdivplus, WIG140, sWIG80TR, WIG-Poland, sWIG80, WIG",sprzęt elektryczny i elektroniczny
+AMICA,AMC,Główny Rynek,"WIGdivplus, WIG140, sWIG80TR, WIG-Poland, sWIG80, WIG",sprzęt elektryczny i elektroniczny
+AMREST HOLDINGS SE,EAT,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIG-Poland, mWIG40, WIG",hotele i restauracje
+ANSWEAR.COM,ANR,Główny Rynek,"WIG-Poland, WIG",Handel Internetowy
+APATOR,APT,Główny Rynek,"WIGdivplus, WIGind, WIG140, sWIG80TR, WIGdiv, WIG-Poland, sWIG80, WIG",urządzenia elektryczne
+APLISENS,APN,Główny Rynek,"WIGind, WIG-Poland, WIG",urządzenia elektryczne
+APS ENERGIA,APE,Główny Rynek,"WIG-Poland, WIG",urządzenia elektryczne
+ARCHICOM,ARH,Główny Rynek,"WIGdivplus, WIG140, sWIG80TR, WIGdiv, WIG-Poland, WIG-nieruchomości, sWIG80, WIG",sprzedaż nieruchomości
+ARCTIC PAPER,ATC,Główny Rynek,"WIGdivplus, WIGind, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, sWIG80, WIG",papier i opakowania
+ARTIFEX MUNDI,ART,Główny Rynek,"GPWB-CENTR, WIG-gry, WIGtechTR, CEEplus, WIG-Poland, WIG",Gry
+AS SILVANO FASHION GROUP,SFG,Główny Rynek,"WIG-odzież, WIG",odzież i obuwie
+ASBISC ENTERPRISES PLC,ASB,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIGdiv, mWIG40, WIG",komputery i elektronika
+ASSECO BUSINESS SOLUTIONS,ABS,Główny Rynek,"WIGdivplus, WIG140, WIGtechTR, sWIG80TR, WIGdiv, WIG-Poland, WIG-informatyka, sWIG80, WIG",oprogramowanie
+ASSECO POLAND,ACP,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, WIGtechTR, CEEplus, mWIG40TR, WIG30TR, WIG30, WIGdiv, WIG-Poland, WIG-informatyka, mWIG40, WIG",systemy informatyczne
+ASSECO SOUTH EASTERN EUROPE,ASE,Główny Rynek,"WIGdivplus, WIG140, WIGtechTR, sWIG80TR, WIGdiv, WIG-Poland, WIG-informatyka, sWIG80, WIG",oprogramowanie
+ASTARTA HOLDING PLC,AST,Główny Rynek,"WIG140, sWIG80TR, WIG-CEE, WIG-Ukraine, WIG-spożywczy, sWIG80, WIG",produkcja rolna i rybołówstwo
+ATAL,1AT,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, WIG-nieruchomości, sWIG80, WIG",sprzedaż nieruchomości
+ATENDE,ATD,Główny Rynek,"WIG-Poland, WIG-informatyka, WIG",systemy informatyczne
+ATLANTA POLAND,ATP,Główny Rynek,"WIG-Poland, WIG-spożywczy, WIG",żywność
+ATLANTIS SE,ATS,Główny Rynek,"WIG-CEE, WIG",Działalność Inwestycyjna
+ATM GRUPA,ATG,Główny Rynek,"WIG-Poland, WIG-media, WIG",radio i telewizja
+ATREM,ATR,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",instalacje budowlane i telekomunikacyjne
+AUTO PARTNER,APR,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIG-motoryzacja, WIG-Poland, mWIG40, WIG",części samochodowe
+BANCO SANTANDER S.A.,SAN,Główny Rynek,"WIG-banki, WIG",banki komercyjne
+BANK HANDLOWY W WARSZAWIE,BHW,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIG-Poland, WIG-banki, mWIG40, WIG",banki komercyjne
+BANK MILLENNIUM,MIL,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIG-Poland, WIG-banki, mWIG40, WIG",banki komercyjne
+BANK OCHRONY ŚRODOWISKA,BOS,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, WIG-banki, sWIG80, WIG",banki komercyjne
+BANK POLSKA KASA OPIEKI,PEO,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, WIG.MS-FIN, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG-banki, WIG20, WIG",banki komercyjne
+BBI DEVELOPMENT,BBD,Główny Rynek,"WIG-Poland, WIG-nieruchomości, WIG",sprzedaż nieruchomości
+BENEFIT SYSTEMS,BFT,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIG-Poland, mWIG40, WIG",rekreacja i wypoczynek - pozostałe
+BETACOM,BCM,Główny Rynek,"INNOVATOR, WIG-Poland, WIG-informatyka, WIG",oprogramowanie
+BIG CHEESE STUDIO,BCS,Główny Rynek,"WIG-gry, WIG-Poland, WIG",Gry
+BIO PLANET,BIP,Główny Rynek,"WIG-Poland, WIG",artykuły codziennego użytku
+BIOCELTIX,BCX,Główny Rynek,"WIGmed, WIG140, WIGtechTR, sWIG80TR, WIG-Poland, sWIG80, WIG",Biotechnologia
+BIOMAXIMA,BMX,Główny Rynek,"WIGmed, WIG-Poland, WIG",Biotechnologia
+BIOTON,BIO,Główny Rynek,"WIGmed, WIG140, sWIG80TR, WIG-leki, WIG-Poland, sWIG80, WIG",Produkcja Leków
+BLOOBER TEAM,BLO,Główny Rynek,"WIG140, WIG-gry, WIGtechTR, sWIG80TR, WIG-Poland, sWIG80, WIG",Gry
+BNP PARIBAS BANK POLSKA,BNP,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, WIG-banki, sWIG80, WIG",banki komercyjne
+BOOMBIT,BBT,Główny Rynek,"WIG-gry, WIG-Poland, WIG",Gry
+BORYSZEW,BRS,Główny Rynek,"WIGdivplus, WIGind, WIG140, sWIG80TR, WIG-Poland, sWIG80, WIG",hutnictwo metali nieżelaznych
+BOWIM,BOW,Główny Rynek,"WIG-Poland, WIG",wyroby hutnicze
+BUDIMEX,BDX,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, INNOVATOR, CEEplus, WIG30TR, WIG30, WIG20TR, WIGdiv, WIG-Poland, WIG-budownictwo, WIG20, WIG",budownictwo ogólne
+BUMECH,BMC,Główny Rynek,"WIGind, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, sWIG80, WIG",urządzenia mechaniczne
+CAPITEA,CAP,Główny Rynek,"WIG-Poland, WIG",Wierzytelności
+CAPTOR THERAPEUTICS,CTX,Główny Rynek,"WIGmed, WIG140, WIGtechTR, sWIG80TR, WIG-Poland, sWIG80, WIG",Biotechnologia
+CASPAR ASSET MANAGEMENT,CSR,Główny Rynek,"WIG-Poland, WIG",zarządzanie aktywami
+CAVATINA HOLDING,CAV,Główny Rynek,"WIG-Poland, WIG-nieruchomości, WIG",wynajem nieruchomości
+CCC,CCC,Główny Rynek,"GPWB-CENTR, WIG140, INNOVATOR, CEEplus, WIG-odzież, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG20, WIG",odzież i obuwie
+CD PROJEKT,CDR,Główny Rynek,"GPWB-CENTR, WIG140, WIG-gry, WIGtechTR, CEEplus, WIG.GAMES5, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG20, WIG",Gry
+CDRL,CDL,Główny Rynek,"WIG-odzież, WIG-Poland, WIG",odzież i obuwie
+CELON PHARMA,CLN,Główny Rynek,"WIGmed, GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIG-leki, WIGdiv, WIG-Poland, mWIG40, WIG",Produkcja Leków
+CENTRUM MEDYCZNE ENEL-MED,ENE,Główny Rynek,"WIGmed, WIG-Poland, WIG",Szpitale i Przychodnie
+CI GAMES SPÓŁKA EUROPEJSKA,CIG,Główny Rynek,"GPWB-CENTR, WIG140, WIG-gry, WIGtechTR, CEEplus, WIG.GAMES5, sWIG80TR, WIG-Poland, sWIG80, WIG",Gry
+CLOUD TECHNOLOGIES,CLD,Główny Rynek,"WIG-Poland, WIG",Nowe Technologie
+COAL ENERGY S.A.,CLE,Główny Rynek,"WIG-CEE, WIG-Ukraine, WIG-górnictwo, WIG",górnictwo węgla
+COGNOR HOLDING,COG,Główny Rynek,"WIGind, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, sWIG80, WIG",hutnictwo żelaza i stali
+COLUMBUS ENERGY,CLC,Główny Rynek,"WIG140, sWIG80TR, WIG-energia, WIG-Poland, sWIG80, WIG",energia odnawialna
+COMP,CMP,Główny Rynek,"GPWB-CENTR, WIG140, WIGtechTR, CEEplus, sWIG80TR, WIG-Poland, WIG-informatyka, sWIG80, WIG",oprogramowanie
+COMPERIA.PL,CPL,Główny Rynek,"WIG-Poland, WIG-media, WIG",portale internetowe
+COMPREMUM,CPR,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",materiały budowlane
+CPD,CPD,Główny Rynek,"WIG-Poland, WIG-nieruchomości, WIG",wynajem nieruchomości
+CPI EUROPE AG,CPI,Główny Rynek,"WIG-nieruchomości, WIG",wynajem nieruchomości
+CREEPY JAR,CRJ,Główny Rynek,"WIGdivplus, WIG140, WIG-gry, WIGtechTR, sWIG80TR, WIG-Poland, sWIG80, WIG",Gry
+CREOTECH INSTRUMENTS,CRI,Główny Rynek,"WIG140, WIGtechTR, sWIG80TR, WIG-Poland, sWIG80, WIG",Nowe Technologie
+CYBER_FOLKS,CBF,Główny Rynek,"GPWB-CENTR, WIG140, WIGtechTR, CEEplus, mWIG40TR, WIGdiv, WIG-Poland, mWIG40, WIG",Nowe Technologie
+CYFROWY POLSAT,CPS,Główny Rynek,"GPWB-CENTR, WIG140, WIGtechTR, CEEplus, mWIG40TR, WIG30TR, WIG30, WIG-Poland, mWIG40, WIG",Telekomunikacja
+DADELO,DAD,Główny Rynek,"WIG-Poland, WIG",Handel Internetowy
+DATAWALK,DAT,Główny Rynek,"GPWB-CENTR, WIG140, WIGtechTR, CEEplus, sWIG80TR, WIG-Poland, WIG-informatyka, sWIG80, WIG",oprogramowanie
+DB ENERGY,DBE,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",instalacje budowlane i telekomunikacyjne
+DECORA,DCR,Główny Rynek,"WIGdivplus, WIG140, sWIG80TR, WIGdiv, WIG-Poland, WIG-budownictwo, sWIG80, WIG",materiały budowlane
+DEKPOL,DEK,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",budownictwo - pozostałe
+DELKO,DEL,Główny Rynek,"WIG-Poland, WIG",artykuły spożywcze i szybko zbywalne
+DEVELIA,DVL,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIGdiv, WIG-Poland, WIG-nieruchomości, mWIG40, WIG",sprzedaż nieruchomości
+DIAGNOSTYKA,DIA,Główny Rynek,"WIGmed, WIG140, sWIG80TR, WIG-Poland, sWIG80, WIG",Ochrona Zdrowia - Pozostałe
+DIGITAL NETWORK,DIG,Główny Rynek,"WIG-Poland, WIG-media, WIG",reklama i marketing
+DIGITREE GROUP,DTR,Główny Rynek,"WIG-Poland, WIG-informatyka, WIG",oprogramowanie
+DINO POLSKA,DNP,Główny Rynek,"WIG.MS-ECM, GPWB-CENTR, WIG140, CEEplus, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG20, WIG",artykuły codziennego użytku
+DOM DEVELOPMENT,DOM,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIGdiv, WIG-Poland, WIG-nieruchomości, mWIG40, WIG",sprzedaż nieruchomości
+ČEZ. A.S.,CEZ,Główny Rynek,"GPWB-CENTR, CEEplus, WIG-CEE, WIG-energia, WIG",energetyka
+DRAGO ENTERTAINMENT,DGE,Główny Rynek,"WIG-gry, WIG-Poland, WIG",Gry
+ECB,ECB,Główny Rynek,"WIG-energia, WIG-Poland, WIG",energetyka
+ECHO INVESTMENT,ECH,Główny Rynek,"WIG140, sWIG80TR, WIG-Poland, WIG-nieruchomości, sWIG80, WIG",wynajem nieruchomości
+ELEKTROTIM,ELT,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, WIG-budownictwo, sWIG80, WIG",instalacje budowlane i telekomunikacyjne
+ELKOP ESTONIA SE,EKP,Główny Rynek,"WIG-Poland, WIG-nieruchomości, WIG",wynajem nieruchomości
+ENEA,ENA,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, WIG.MS-BAS, mWIG40TR, WIG-energia, WIG-Poland, mWIG40, WIG",energetyka
+ENERGOINSTAL,ENI,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",instalacje budowlane i telekomunikacyjne
+ENTER AIR,ENT,Główny Rynek,"WIGind, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, sWIG80, WIG",transport
+EQUNICO SE,EQU,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",budownictwo ogólne
+ERBUD,ERB,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, WIG-budownictwo, sWIG80, WIG",budownictwo przemysłowe
+ERG,ERG,Główny Rynek,"WIG-Poland, WIG",tworzywa sztuczne
+ESOTIQ & HENDERSON,EAH,Główny Rynek,"WIG-odzież, WIG-Poland, WIG",odzież i obuwie
+EUROCASH,EUR,Główny Rynek,"WIG.MS-ECM, GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIG-Poland, mWIG40, WIG",artykuły codziennego użytku
+EUROTEL,ETL,Główny Rynek,"WIG-Poland, WIG",elektronika użytkowa
+FABRITY,FAB,Główny Rynek,"WIG-Poland, WIG-informatyka, WIG",oprogramowanie
+FABRYKA FARB I LAKIERÓW ŚNIEŻKA,SKA,Główny Rynek,"WIGdivplus, WIG140, sWIG80TR, WIGdiv, WIG-Poland, WIG-budownictwo, sWIG80, WIG",materiały budowlane
+FABRYKI MEBLI FORTE,FTE,Główny Rynek,"WIG140, sWIG80TR, WIG-Poland, sWIG80, WIG",meble i dywany
+FABRYKI SPRZĘTU I NARZĘDZI GÓRNICZYCH GRUPA KAPITAŁOWA FASING,FSG,Główny Rynek,"WIG-Poland, WIG",urządzenia mechaniczne
+FEERUM,FEE,Główny Rynek,"WIG-Poland, WIG",urządzenia mechaniczne
+FERRO,FRO,Główny Rynek,"WIGdivplus, WIG140, sWIG80TR, WIGdiv, WIG-Poland, WIG-budownictwo, sWIG80, WIG",materiały budowlane
+FON SE,FON,Główny Rynek,"GPWB-CENTR, CEEplus",Pośrednictwo Finansowe
+GAMES OPERATORS,GOP,Główny Rynek,"GPWB-CENTR, WIG-gry, CEEplus, WIG-Poland, WIG",Gry
+GAMING FACTORY,GIF,Główny Rynek,"WIG-gry, WIG-Poland, WIG",Gry
+GENOMTEC,GMT,Główny Rynek,"WIGmed, WIG-Poland, WIG",Biotechnologia
+GETIN HOLDING,GTN,Główny Rynek,"GPWB-CENTR, CEEplus, WIG-Poland, WIG-banki, WIG",banki komercyjne
+GIEŁDA PAPIERÓW WARTOŚCIOWYCH W WARSZAWIE,GPW,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIGdiv, WIG-Poland, mWIG40, WIG",giełdy i biura maklerskie
+GIEŁDA PRAW MAJĄTKOWYCH VINDEXUS,VIN,Główny Rynek,"WIG-Poland, WIG",Wierzytelności
+GLOBE TRADE CENTRE,GTC,Główny Rynek,"WIG-Poland, WIG-nieruchomości, WIG",wynajem nieruchomości
+GREENX METALS LIMITED,GRX,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-górnictwo, sWIG80, WIG",górnictwo węgla
+GRENEVIA,GEA,Główny Rynek,"WIGind, GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIG-Poland, mWIG40, WIG",urządzenia mechaniczne
+GRODNO,GRN,Główny Rynek,"WIGind, WIG-Poland, WIG",artykuły elektryczne
+GRUPA AZOTY,ATT,Główny Rynek,"WIGind, GPWB-CENTR, WIG140, INNOVATOR, CEEplus, mWIG40TR, WIG30TR, WIG30, WIG-Poland, WIG-chemia, mWIG40, WIG",chemia podstawowa
+GRUPA AZOTY ZAKŁADY CHEMICZNE POLICE,PCE,Główny Rynek,"WIGind, WIG-Poland, WIG-chemia, WIG",chemia podstawowa
+GRUPA KAPITAŁOWA IMMOBILE,GKI,Główny Rynek,"WIG-Poland, WIG",Działalność Inwestycyjna
+GRUPA KĘTY,KTY,Główny Rynek,"WIGdivplus, WIGind, GPWB-CENTR, WIG140, CEEplus, WIG30TR, WIG30, WIG20TR, WIGdiv, WIG-Poland, WIG20, WIG",hutnictwo metali nieżelaznych
+GRUPA PRACUJ,GPP,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIGdiv, WIG-Poland, WIG-media, mWIG40, WIG",portale internetowe
+HARPER HYGIENICS,HRP,Główny Rynek,"WIG-odzież, WIG-Poland, WIG",kosmetyki i chemia gospodarcza
+HELIO,HEL,Główny Rynek,"WIG-Poland, WIG-spożywczy, WIG",żywność
+HUUUGE. INC.,HUG,Główny Rynek,"GPWB-CENTR, WIG140, WIG-gry, WIGtechTR, CEEplus, WIG.GAMES5, mWIG40TR, mWIG40, WIG",Gry
+IFIRMA,IFI,Główny Rynek,"WIG-Poland, WIG-informatyka, WIG",oprogramowanie
+IMC S.A.,IMC,Główny Rynek,"WIG-CEE, WIG-Ukraine, WIG-spożywczy, WIG",produkcja rolna i rybołówstwo
+IMPERIO ALTERNATYWNA SPÓŁKA INWESTYCYJNA,IMP,Główny Rynek,"WIG-Poland, WIG",Działalność Inwestycyjna
+IMS,IMS,Główny Rynek,"WIG-Poland, WIG-media, WIG",media - pozostałe
+INC,INC,Główny Rynek,"WIG-Poland, WIG",Działalność Inwestycyjna
+ING BANK ŚLĄSKI,ING,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIG-Poland, WIG-banki, mWIG40, WIG",banki komercyjne
+INPRO,INP,Główny Rynek,"WIG-Poland, WIG-nieruchomości, WIG",sprzedaż nieruchomości
+INSTAL KRAKÓW,INK,Główny Rynek,"WIGdivplus, WIGdiv, WIG-Poland, WIG-budownictwo, WIG",budownictwo przemysłowe
+INTER CARS,CAR,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIG-motoryzacja, WIG-Poland, mWIG40, WIG",części samochodowe
+INTERBUD-LUBLIN,ITB,Główny Rynek,"WIG-Poland, WIG-nieruchomości, WIG",sprzedaż nieruchomości
+INTERSPORT POLSKA,IPO,Główny Rynek,"WIG-odzież, WIG-Poland, WIG",odzież i obuwie
+INTROL,INL,Główny Rynek,"WIGind, WIG-Poland, WIG",urządzenia mechaniczne
+IPOPEMA SECURITIES,IPE,Główny Rynek,"WIG-Poland, WIG",giełdy i biura maklerskie
+IZOLACJA-JAROCIN,IZO,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",materiały budowlane
+IZOSTAL,IZS,Główny Rynek,"WIGind, WIG-Poland, WIG",wyroby metalowe
+JASTRZĘBSKA SPÓŁKA WĘGLOWA,JSW,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, WIG.MS-BAS, mWIG40TR, WIG30TR, WIG30, WIG-górnictwo, WIG-Poland, mWIG40, WIG",górnictwo węgla
+JRH ALTERNATYWNA SPÓŁKA INWESTYCYJNA,JRH,Główny Rynek,"WIG-Poland, WIG",Działalność Inwestycyjna
+KCI,KCI,Główny Rynek,"WIG-Poland, WIG-media, WIG",wydawnictwa
+KGHM POLSKA MIEDŹ,KGH,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, WIG.MS-BAS, WIG30TR, WIG30, WIG20TR, WIG-górnictwo, WIG-Poland, WIG20, WIG",górnictwo metali
+KINO POLSKA TV,KPL,Główny Rynek,"WIG-Poland, WIG-media, WIG",radio i telewizja
+KOMPUTRONIK,KOM,Główny Rynek,"WIG-Poland, WIG",elektronika użytkowa
+KOSZALIŃSKIE PRZEDSIĘBIORSTWO PRZEMYSŁU DRZEWNEGO,KPD,Główny Rynek,"WIG-Poland, WIG",drewno
+KRAKCHEMIA,KCH,Główny Rynek,"WIG-Poland, WIG",chemikalia
+KRKA. TOVARNA ZDRAVIL. D.D.. NOVO MESTO,KRK,Główny Rynek,"WIGmed, GPWB-CENTR, CEEplus, WIG-leki, WIG-CEE, WIG",Produkcja Leków
+KRUK,KRU,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG20, WIG",Wierzytelności
+KRYNICA VITAMIN,KVT,Główny Rynek,"WIG-Poland, WIG-spożywczy, WIG",napoje
+KSG AGRO S.A.,KSG,Główny Rynek,"WIG-CEE, WIG-Ukraine, WIG-spożywczy, WIG",produkcja rolna i rybołówstwo
+LARQ,LRQ,Główny Rynek,"WIG-Poland, WIG-media, WIG",reklama i marketing
+LENA LIGHTING,LEN,Główny Rynek,"WIG-Poland, WIG",urządzenia elektryczne
+LENTEX,LTX,Główny Rynek,"WIGind, WIG-Poland, WIG",zaopatrzenie przedsiębiorstw - pozostałe
+LESS,LES,Główny Rynek,"WIG-Poland, WIG",Handel Internetowy
+LIBET,LBT,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",materiały budowlane
+LOKUM DEWELOPER,LKD,Główny Rynek,"WIG-Poland, WIG-nieruchomości, WIG",sprzedaż nieruchomości
+LPP,LPP,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, WIG-odzież, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG20, WIG",odzież i obuwie
+LSI SOFTWARE,LSI,Główny Rynek,"WIG-Poland, WIG-informatyka, WIG",oprogramowanie
+LUBAWA,LBW,Główny Rynek,"GPWB-CENTR, WIG140, INNOVATOR, CEEplus, mWIG40TR, WIG-odzież, WIG-Poland, mWIG40, WIG",odzież i kosmetyki - pozostałe
+LUBELSKI WĘGIEL BOGDANKA,LWB,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-górnictwo, WIG-Poland, sWIG80, WIG",górnictwo węgla
+MABION,MAB,Główny Rynek,"WIGmed, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-leki, WIG-Poland, sWIG80, WIG",Produkcja Leków
+MAGNA POLONIA,06N,Główny Rynek,"WIG-Poland, WIG",Działalność Inwestycyjna
+MAKARONY POLSKIE,MAK,Główny Rynek,"WIG-Poland, WIG-spożywczy, WIG",żywność
+MANGATA HOLDING,MGT,Główny Rynek,"WIGdivplus, WIGind, WIG-Poland, WIG",wyroby metalowe
+MARIE BRIZARD WINE & SPIRITS,MBW,Główny Rynek,"WIG-spożywczy, WIG",napoje
+MARVIPOL DEVELOPMENT,MVP,Główny Rynek,"WIG-Poland, WIG-nieruchomości, WIG",wynajem nieruchomości
+MAXCOM,MXC,Główny Rynek,"WIG-Poland, WIG",sprzęt elektryczny i elektroniczny
+MBANK,MBK,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG-banki, WIG20, WIG",banki komercyjne
+MCI CAPITAL ALTERNATYWNA SPÓŁKA INWESTYCYJNA,MCI,Główny Rynek,"WIG140, sWIG80TR, WIG-Poland, sWIG80, WIG",Działalność Inwestycyjna
+MDI ENERGIA,MDI,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",inżynieria lądowa i wodna
+MEDICALGORITHMICS,MDG,Główny Rynek,"WIGmed, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, sWIG80, WIG",Sprzęt i Materiały Medyczne
+MEDINICE,ICE,Główny Rynek,"WIGmed, WIG-Poland, WIG",Ochrona Zdrowia - Pozostałe
+MENNICA POLSKA,MNC,Główny Rynek,"WIGdivplus, WIGind, WIG140, sWIG80TR, WIGdiv, WIG-Poland, sWIG80, WIG",hutnictwo metali nieżelaznych
+MERCATOR MEDICAL,MRC,Główny Rynek,"WIGmed, WIG140, sWIG80TR, WIG-Poland, sWIG80, WIG",Sprzęt i Materiały Medyczne
+MERCOR,MCR,Główny Rynek,"WIG140, INNOVATOR, sWIG80TR, WIG-Poland, WIG-budownictwo, sWIG80, WIG",materiały budowlane
+MEX POLSKA,MEX,Główny Rynek,"WIG-Poland, WIG",hotele i restauracje
+MFO,MFO,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",materiały budowlane
+MIRACULUM,MIR,Główny Rynek,"WIG-odzież, WIG-Poland, WIG",kosmetyki i chemia gospodarcza
+MIRBUD,MRB,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIGdiv, WIG-Poland, WIG-budownictwo, mWIG40, WIG",budownictwo ogólne
+ML SYSTEM,MLS,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-energia, WIG-Poland, sWIG80, WIG",energia odnawialna
+MLK FOODS PUBLIC COMPANY LTD,MLK,Główny Rynek,"WIG-CEE, WIG-Ukraine, WIG-spożywczy, WIG",żywność
+MLP GROUP,MLG,Główny Rynek,"WIG140, sWIG80TR, WIG-Poland, WIG-nieruchomości, sWIG80, WIG",wynajem nieruchomości
+MO-BRUK,MBR,Główny Rynek,"WIGdivplus, WIGind, GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIGdiv, WIG-Poland, mWIG40, WIG",Recykling
+MOL MAGYAR OLAJ - ES GAZIPARI NYILVANOSAN MUKODO RESZVENYTARSASAG,MOL,Główny Rynek,"GPWB-CENTR, CEEplus, WIG-CEE, WIG-paliwa, WIG",wydobycie i produkcja
+MOLECURE,MOC,Główny Rynek,"WIGmed, WIG140, WIGtechTR, sWIG80TR, WIG-Poland, sWIG80, WIG",Biotechnologia
+MONNARI TRADE,MON,Główny Rynek,"WIG-odzież, WIG-Poland, WIG",odzież i obuwie
+MOSTOSTAL PŁOCK,MSP,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",budownictwo przemysłowe
+MOSTOSTAL WARSZAWA,MSW,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",budownictwo przemysłowe
+MOSTOSTAL ZABRZE,MSZ,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, WIG-budownictwo, sWIG80, WIG",budownictwo przemysłowe
+MOVIE GAMES,MOV,Główny Rynek,"WIG-gry, WIG-Poland, WIG",Gry
+MURAPOL,MUR,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, WIG-nieruchomości, sWIG80, WIG",sprzedaż nieruchomości
+MUZA,MZA,Główny Rynek,"WIG-Poland, WIG-media, WIG",wydawnictwa
+NANOGROUP,NNG,Główny Rynek,"WIGmed, WIG-Poland, WIG",Biotechnologia
+NEPTIS,YAN,Główny Rynek,"WIG-Poland, WIG-informatyka, WIG",oprogramowanie
+NEUCA,NEU,Główny Rynek,"WIGmed, GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIGdiv, WIG-Poland, mWIG40, WIG",Dystrybucja Leków
+NEW TECH CAPITAL,NTC,Główny Rynek,"WIG-Poland, WIG",Działalność Inwestycyjna
+NEWAG,NWG,Główny Rynek,"WIGdivplus, WIGind, WIG140, mWIG40TR, WIG-Poland, mWIG40, WIG",środki transportu
+NEXITY GLOBAL,NXG,Główny Rynek,"WIG-Poland, WIG",Usługi dla Przedsiębiorstw
+NOCTILUCA,NCL,Główny Rynek,"WIG-Poland, WIG",Nowe Technologie
+NOVAVIS GROUP,NVG,Główny Rynek,"WIG-energia, WIG-Poland, WIG",energia odnawialna
+NPL NOVA,PRI,Główny Rynek,"WIG-Poland, WIG",Wierzytelności
+NTT SYSTEM,NTT,Główny Rynek,"WIG-Poland, WIG-informatyka, WIG",sprzęt informatyczny
+ODLEWNIE POLSKIE,ODL,Główny Rynek,"WIGind, WIG-Poland, WIG",hutnictwo żelaza i stali
+ONDE,OND,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-energia, WIG-Poland, sWIG80, WIG",energia odnawialna
+ONESANO,ONO,Główny Rynek,"WIGmed, WIG-Poland, WIG",Biotechnologia
+OPONEO.PL,OPN,Główny Rynek,"WIGdivplus, WIG140, sWIG80TR, WIGdiv, WIG-Poland, sWIG80, WIG",Handel Internetowy
+OPTEAM,OPM,Główny Rynek,"WIG-Poland, WIG-informatyka, WIG",oprogramowanie
+ORANGE POLSKA,OPL,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, WIGtechTR, CEEplus, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG20, WIG",Telekomunikacja
+ORLEN,PKN,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, INNOVATOR, CEEplus, WIG30TR, WIG30, WIG20TR, WIGdiv, WIG-Poland, WIG-paliwa, WIG20, WIG",wydobycie i produkcja
+OT LOGISTICS,OTS,Główny Rynek,"WIGind, WIG-Poland, WIG",transport
+P.A. NOVA,NVA,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",budownictwo ogólne
+PAMAPOL,PMP,Główny Rynek,"WIG-Poland, WIG-spożywczy, WIG",żywność
+PASSUS,PAS,Główny Rynek,"WIG-Poland, WIG-informatyka, WIG",oprogramowanie
+PATENTUS,PAT,Główny Rynek,"WIG-Poland, WIG",urządzenia mechaniczne
+PCC ROKITA,PCR,Główny Rynek,"WIGdivplus, WIGind, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIGdiv, WIG-Poland, WIG-chemia, sWIG80, WIG",chemia podstawowa
+PCF GROUP,PCF,Główny Rynek,"WIG-gry, WIGtechTR, WIG-Poland, WIG",Gry
+PEPCO GROUP N.V.,PCO,Główny Rynek,"WIG.MS-ECM, GPWB-CENTR, WIG140, CEEplus, WIG30TR, WIG30, WIG20TR, WIG20, WIG",artykuły codziennego użytku
+PGE POLSKA GRUPA ENERGETYCZNA,PGE,Główny Rynek,"GPWB-CENTR, WIG140, INNOVATOR, CEEplus, WIG.MS-BAS, WIG30TR, WIG30, WIG20TR, WIG-energia, WIG-Poland, WIG20, WIG",energetyka
+PGF POLSKA GRUPA FOTOWOLTAICZNA,PGV,Główny Rynek,"WIG-Poland, WIG",Działalność Inwestycyjna
+PHARMENA,PHR,Główny Rynek,"WIG-leki, WIG-Poland, WIG",Produkcja Leków
+PHOTON ENERGY N.V.,PEN,Główny Rynek,"WIG-CEE, WIG-energia, WIG",energia odnawialna
+PJP MAKRUM,PJP,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",budownictwo przemysłowe
+PLAYWAY,PLW,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, WIG-gry, WIGtechTR, CEEplus, sWIG80TR, WIGdiv, WIG-Poland, sWIG80, WIG",Gry
+PLAZA CENTERS N.V.,PLZ,Główny Rynek,"GPWB-CENTR, CEEplus, WIG-nieruchomości, WIG",wynajem nieruchomości
+PMPG POLSKIE MEDIA,PGM,Główny Rynek,"WIG-Poland, WIG-media, WIG",wydawnictwa
+POLENERGIA,PEP,Główny Rynek,"WIG140, mWIG40TR, WIG-energia, WIG-Poland, mWIG40, WIG",energetyka
+POLIMEX MOSTOSTAL,PXM,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, WIG-budownictwo, sWIG80, WIG",budownictwo przemysłowe
+POLSKI HOLDING NIERUCHOMOŚCI,PHN,Główny Rynek,"WIG-Poland, WIG-nieruchomości, WIG",wynajem nieruchomości
+POLSKIE TOWARZYSTWO WSPIERANIA PRZEDSIĘBIORCZOŚCI,PTW,Główny Rynek,"WIG-Poland, WIG-media, WIG",wydawnictwa
+POLTREG,PTG,Główny Rynek,"WIGmed, WIG-Poland, WIG",Biotechnologia
+POLWAX,PWX,Główny Rynek,"INNOVATOR, WIG-Poland, WIG-chemia, WIG",chemia specjalistyczna
+POWSZECHNA KASA OSZCZĘDNOŚCI BANK POLSKI,PKO,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, WIG.MS-FIN, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG-banki, WIG20, WIG",banki komercyjne
+POWSZECHNY ZAKŁAD UBEZPIECZEŃ,PZU,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, WIG.MS-FIN, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG20, WIG",firmy ubezpieczeniowe
+POZNAŃSKA KORPORACJA BUDOWLANA PEKABEX,PBX,Główny Rynek,"WIGdivplus, WIG140, sWIG80TR, WIGdiv, WIG-Poland, WIG-budownictwo, sWIG80, WIG",materiały budowlane
+PROCHEM,PRM,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",budownictwo przemysłowe
+PROTEKTOR,PRT,Główny Rynek,"WIG-odzież, WIG-Poland, WIG",odzież i obuwie
+PRZEDSIĘBIORSTWO HYDRAULIKI SIŁOWEJ HYDROTOR S.A.,HDR,Główny Rynek,"WIGind, WIG-Poland, WIG",urządzenia mechaniczne
+PRZEDSIĘBIORSTWO PRODUKCYJNO HANDLOWE KOMPAP,KMP,Główny Rynek,"WIG-Poland, WIG",papier i opakowania
+PRZEDSIĘBIORSTWO PRZEMYSŁU SPOŻYWCZEGO PEPEES,PPS,Główny Rynek,"WIG-Poland, WIG-spożywczy, WIG",napoje
+PURE BIOLOGICS,PUR,Główny Rynek,"WIGmed, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, sWIG80, WIG",Biotechnologia
+PZ CORMAY,CRM,Główny Rynek,"WIGmed, WIG-leki, WIG-Poland, WIG",Produkcja Leków
+QUERCUS TOWARZYSTWO FUNDUSZY INWESTYCYJNYCH,QRS,Główny Rynek,"WIG140, sWIG80TR, WIG-Poland, sWIG80, WIG",zarządzanie aktywami
+RAEN,RAE,Główny Rynek,"WIG-energia, WIG-Poland, WIG",energia odnawialna
+RAINBOW TOURS,RBW,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIG30TR, WIG30, WIG-Poland, mWIG40, WIG",biura podróży
+RANK PROGRESS,RNK,Główny Rynek,"WIG140, sWIG80TR, WIG-Poland, WIG-nieruchomości, sWIG80, WIG",wynajem nieruchomości
+RAWLPLUG,RWL,Główny Rynek,"WIGind, WIG-Poland, WIG",wyroby metalowe
+RELPOL,RLP,Główny Rynek,"WIG-Poland, WIG",urządzenia elektryczne
+REMAK-ENERGOMONTAŻ,RMK,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",budownictwo przemysłowe
+RENDER CUBE,RND,Główny Rynek,"WIG-gry, WIG-Poland, WIG",Gry
+RYVU THERAPEUTICS,RVU,Główny Rynek,"WIGmed, GPWB-CENTR, WIG140, WIGtechTR, CEEplus, sWIG80TR, WIG-Poland, sWIG80, WIG",Biotechnologia
+SANOK RUBBER COMPANY,SNK,Główny Rynek,"WIG140, sWIG80TR, WIG-motoryzacja, WIG-Poland, sWIG80, WIG",części samochodowe
+SANTANDER BANK POLSKA,SPL,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG-banki, WIG20, WIG",banki komercyjne
+SANWIL HOLDING,SNW,Główny Rynek,"WIG-odzież, WIG-Poland, WIG",odzież i obuwie
+SCOPE FLUIDICS,SCP,Główny Rynek,"WIGmed, GPWB-CENTR, WIG140, INNOVATOR, WIGtechTR, CEEplus, sWIG80TR, WIG-Poland, sWIG80, WIG",Biotechnologia
+SECO/WARWICK,SWG,Główny Rynek,"WIGind, WIG-Poland, WIG",urządzenia mechaniczne
+SEKO,SEK,Główny Rynek,"WIG-Poland, WIG-spożywczy, WIG",żywność
+SELENA FM,SEL,Główny Rynek,"WIG140, sWIG80TR, WIG-Poland, WIG-budownictwo, sWIG80, WIG",materiały budowlane
+SELVITA,SLV,Główny Rynek,"WIGmed, GPWB-CENTR, WIG140, WIGtechTR, CEEplus, mWIG40TR, WIG-Poland, mWIG40, WIG",Biotechnologia
+SFINKS POLSKA,SFS,Główny Rynek,"WIG-Poland, WIG",hotele i restauracje
+SHOPER,SHO,Główny Rynek,"GPWB-CENTR, WIG140, WIGtechTR, CEEplus, sWIG80TR, WIGdiv, WIG-Poland, WIG-informatyka, sWIG80, WIG",oprogramowanie
+SILVAIR. INC.,SVRS,Główny Rynek,"WIG-informatyka, WIG",oprogramowanie
+SIMFABRIC,SIM,Główny Rynek,"WIG-gry, WIG-Poland, WIG",Gry
+SKARBIEC HOLDING SPÓLKA AKCYJNA,SKH,Główny Rynek,"WIG-Poland, WIG",zarządzanie aktywami
+SKYLINE INVESTMENT,SKL,Główny Rynek,"WIG-Poland, WIG",Działalność Inwestycyjna
+SONEL,SON,Główny Rynek,"WIGind, WIG-Poland, WIG",urządzenia elektryczne
+SOPHARMA AD,SPH,Główny Rynek,"WIG-leki, WIG-CEE, WIG",Produkcja Leków
+SPYROSOFT,SPR,Główny Rynek,"WIGtechTR, WIG-Poland, WIG-informatyka, WIG",oprogramowanie
+STALEXPORT AUTOSTRADY,STX,Główny Rynek,"WIGdivplus, WIGind, WIG140, sWIG80TR, WIGdiv, WIG-Poland, sWIG80, WIG",transport i logistyka - pozostałe
+STALPRODUKT,STP,Główny Rynek,"WIGind, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, sWIG80, WIG",hutnictwo żelaza i stali
+STALPROFIL,STF,Główny Rynek,"WIGind, WIG-Poland, WIG",wyroby hutnicze
+SUNEX,SNX,Główny Rynek,"WIGind, GPWB-CENTR, CEEplus, WIG-Poland, WIG",urządzenia elektryczne
+SYGNITY,SGN,Główny Rynek,"WIG140, WIGtechTR, sWIG80TR, WIG-Poland, WIG-informatyka, sWIG80, WIG",systemy informatyczne
+SYNEKTIK,SNT,Główny Rynek,"WIGmed, GPWB-CENTR, WIG140, WIGtechTR, CEEplus, mWIG40TR, WIG30TR, WIG30, WIGdiv, WIG-Poland, mWIG40, WIG",Biotechnologia
+SYNTHAVERSE,SVE,Główny Rynek,"WIGmed, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-leki, WIG-Poland, sWIG80, WIG",Produkcja Leków
+TALEX,TLX,Główny Rynek,"WIG-Poland, WIG-informatyka, WIG",systemy informatyczne
+TARCZYŃSKI,TAR,Główny Rynek,"WIG140, sWIG80TR, WIG-Poland, WIG-spożywczy, sWIG80, WIG",żywność
+TATRY MOUNTAIN RESORTS. A.S.,TMR,Główny Rynek,"WIG-CEE, WIG",hotele i restauracje
+TAURON POLSKA ENERGIA,TPE,Główny Rynek,"GPWB-CENTR, WIG140, INNOVATOR, CEEplus, WIG.MS-BAS, mWIG40TR, WIG30TR, WIG30, WIG-energia, WIG-Poland, mWIG40, WIG",energetyka
+TEN SQUARE GAMES,TEN,Główny Rynek,"GPWB-CENTR, WIG140, WIG-gry, WIGtechTR, CEEplus, WIG.GAMES5, mWIG40TR, WIG-Poland, mWIG40, WIG",Gry
+TENDERHUT,THG,Główny Rynek,"WIG-Poland, WIG",Nowe Technologie
+TESGAS,TSG,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",inżynieria lądowa i wodna
+TEXT,TXT,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, WIGtechTR, CEEplus, mWIG40TR, WIG30TR, WIG30, WIGdiv, WIG-Poland, WIG-informatyka, mWIG40, WIG",oprogramowanie
+TORPOL,TOR,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, WIG-budownictwo, sWIG80, WIG",inżynieria lądowa i wodna
+TOYA,TOA,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, sWIG80, WIG",handel hurtowy - pozostałe
+TRANS POLONIA,TRN,Główny Rynek,"WIG-Poland, WIG",transport
+ULMA CONSTRUCCION POLSKA,ULM,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",materiały budowlane
+ULTIMATE GAMES,ULG,Główny Rynek,"WIG-gry, WIG-Poland, WIG",Gry
+UNFOLD.VC ASI,UNF,Główny Rynek,"WIG-Poland, WIG",Działalność Inwestycyjna
+UNIBEP,UNI,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",budownictwo ogólne
+UNICREDIT S.P.A.,UCG,Główny Rynek,"WIG-banki, WIG",banki komercyjne
+UNIMOT,UNT,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, WIG-paliwa, sWIG80, WIG",dystrybucja paliw i gazu
+URTESTE,URT,Główny Rynek,"WIGmed, WIG-Poland, WIG",Biotechnologia
+VERCOM,VRC,Główny Rynek,"GPWB-CENTR, WIG140, WIGtechTR, CEEplus, mWIG40TR, WIG-Poland, WIG-informatyka, mWIG40, WIG",systemy informatyczne
+VIGO PHOTONICS,VGO,Główny Rynek,"GPWB-CENTR, WIG140, INNOVATOR, WIGtechTR, CEEplus, sWIG80TR, WIG-Poland, sWIG80, WIG",Nowe Technologie
+VIVID GAMES,VVD,Główny Rynek,"WIG-gry, WIG-Poland, WIG",Gry
+VOTUM,VOT,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-Poland, sWIG80, WIG",ubezpieczenia - pozostałe
+VOXEL,VOX,Główny Rynek,"WIGdivplus, WIGmed, GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIGdiv, WIG-Poland, mWIG40, WIG",Sprzęt i Materiały Medyczne
+VRG,VRG,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-odzież, WIG-Poland, sWIG80, WIG",odzież i obuwie
+WARIMPEX FINANZ- UND BETEILIGUNGS AG,WXF,Główny Rynek,"WIG-nieruchomości, WIG",wynajem nieruchomości
+WASKO,WAS,Główny Rynek,"WIG-Poland, WIG-informatyka, WIG",systemy informatyczne
+WAWEL,WWL,Główny Rynek,"WIGdivplus, WIG140, sWIG80TR, WIG-Poland, WIG-spożywczy, sWIG80, WIG",żywność
+WIELTON,WLT,Główny Rynek,"WIGind, WIG140, sWIG80TR, WIG-Poland, sWIG80, WIG",środki transportu
+WIKANA,WIK,Główny Rynek,"WIG-Poland, WIG-nieruchomości, WIG",sprzedaż nieruchomości
+WIRTUALNA POLSKA HOLDING,WPL,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, mWIG40TR, WIG-Poland, WIG-media, mWIG40, WIG",portale internetowe
+WISE ENERGY,FMG,Główny Rynek,"WIG-Poland, WIG",Działalność Inwestycyjna
+WITTCHEN,WTN,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-odzież, WIG-Poland, sWIG80, WIG",odzież i obuwie
+WOODPECKER.CO,WPR,Główny Rynek,"WIG-Poland, WIG-informatyka, WIG",oprogramowanie
+XPLUS,XPL,Główny Rynek,"WIG-Poland, WIG-informatyka, WIG",informatyka - pozostałe
+XTB,XTB,Główny Rynek,"WIGdivplus, GPWB-CENTR, WIG140, CEEplus, WIG.MS-FIN, mWIG40TR, WIG30TR, WIG30, WIGdiv, WIG-Poland, mWIG40, WIG",giełdy i biura maklerskie
+XTPL,XTP,Główny Rynek,"WIG140, INNOVATOR, WIGtechTR, sWIG80TR, WIG-Poland, sWIG80, WIG",Nowe Technologie
+YARRL,YRL,Główny Rynek,"WIG-Poland, WIG-informatyka, WIG",systemy informatyczne
+ZABKA GROUP (SOCIÉTÉ ANONYME),ZAB,Główny Rynek,"WIG.MS-ECM, GPWB-CENTR, WIG140, CEEplus, WIG30TR, WIG30, WIG20TR, WIG-Poland, WIG20, WIG",artykuły codziennego użytku
+ZAKŁAD BUDOWY MASZYN ZREMB-CHOJNICE,ZRE,Główny Rynek,"WIGind, WIG-Poland, WIG",urządzenia mechaniczne
+ZAKŁADY MAGNEZYTOWE ROPCZYCE,RPC,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",materiały budowlane
+ZAKŁADY PRZEMYSŁU CUKIERNICZEGO OTMUCHÓW,OTM,Główny Rynek,"WIG-Poland, WIG-spożywczy, WIG",żywność
+ZAKŁADY URZĄDZEŃ KOTŁOWYCH STĄPORKÓW,ZUK,Główny Rynek,"WIG-Poland, WIG",wyroby metalowe
+ZAMET,ZMT,Główny Rynek,"WIGind, WIG-Poland, WIG",urządzenia mechaniczne
+ZE PAK,ZEP,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-energia, WIG-Poland, sWIG80, WIG",energetyka
+ZESPÓŁ ELEKTROCIEPŁOWNI WROCŁAWSKICH KOGENERACJA,KGN,Główny Rynek,"GPWB-CENTR, WIG140, CEEplus, sWIG80TR, WIG-energia, WIG-Poland, sWIG80, WIG",energetyka
+ZUE,ZUE,Główny Rynek,"WIG-Poland, WIG-budownictwo, WIG",instalacje budowlane i telekomunikacyjne

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Rejestracja - StockCheck{% endblock %}
+{% block content %}
+    <h2>Rejestracja</h2>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="form-error" style="color:red;">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form method="post">
+        {{ form.hidden_tag() }}
+        <div>{{ form.email.label }}<br>{{ form.email(size=32) }}</div>
+        <div>{{ form.username.label }}<br>{{ form.username(size=32) }}</div>
+        <div>{{ form.password.label }}<br>{{ form.password(size=32) }}</div>
+        <div>{{ form.pass_confirm.label }}<br>{{ form.pass_confirm(size=32) }}</div>
+        <div>{{ form.submit(class_='submit-btn') }}</div>
+    </form>
+    <a href="/login">Masz już konto? Zaloguj się</a>
+{% endblock %}

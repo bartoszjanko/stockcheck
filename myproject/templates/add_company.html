@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Dodaj spółkę - StockCheck{% endblock %}
+{% block content %}
+<h2>Dodaj spółkę do swojego portfela</h2>
+<form method="post">
+        {{ form.hidden_tag() }}
+        <div>
+            <label>Wybierz rynek:</label><br>
+            {% for market in form.available_markets %}
+                <button name="selected_market" value="{{ market }}" type="submit" class="btn btn-primary" {% if form.selected_market == market %}disabled{% endif %}>{{ market }}</button>
+            {% endfor %}
+        </div>
+        {% if form.selected_market %}
+        <div style="margin-top:1em;">
+            {{ form.company.label }}<br>
+            {{ form.company(class_='form-control', id='company') }}
+            {% if form.company.errors %}
+                <div class="text-danger">{{ form.company.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div style="margin-top:1em;">{{ form.submit(class_='submit-btn') }}</div>
+        {% endif %}
+        {% for field, errors in form.errors.items() %}
+            {% for error in errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        {% endfor %}
+    </form>
+<a href="/companies">Wróć do listy spółek</a>
+{% endblock %}
