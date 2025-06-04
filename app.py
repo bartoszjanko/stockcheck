@@ -18,6 +18,9 @@ with app.app_context():
     tables = inspector.get_table_names()
     if 'company' in tables:
         update_reports() # automatyczna aktualizacja terminarza z raportami ze strefy inwestora
+        from myproject.scrape_recommendations import update_recommendations
+        update_recommendations() # automatyczna aktualizacja rekomendacji
+        
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -68,11 +71,15 @@ def company_detail(company_id):
     user_company = UserCompany.query.filter_by(user_id=current_user.id, company_id=company_id).first_or_404()
     company = user_company.company
 
-    # Pobierz najbliższe raporty (od dziś w górę) - poprawka: użyj query, nie company.reports
+    # Pobierz najbliższe raporty (od dziś w górę)
     upcoming_reports = Report.query.filter(
         Report.company_id == company.id,
         Report.report_date >= date.today()
     ).order_by(Report.report_date.asc()).all()
+
+    # Pobierz rekomendacje dla spółki (posortowane od najnowszej)
+    from myproject.models import Recommendation
+    recommendations = Recommendation.query.filter_by(company_id=company.id).order_by(Recommendation.publication_date.desc()).all()
 
     # Pobierz dzienne dane ze Stooq
     stooq_daily = None
@@ -81,12 +88,10 @@ def company_detail(company_id):
         r = requests.get(url, timeout=20)
         if r.ok and r.text and not r.text.strip().startswith('Brak danych'):
             lines = r.text.splitlines()
-            # Obsługa formatu: jeśli pierwszy wiersz zaczyna się od 'Data', to jest to nagłówek po polsku
             if len(lines) > 1 and (lines[0].startswith('Data') or lines[0].startswith('<DATE>')):
                 df = pd.read_csv(StringIO('\n'.join(lines)))
                 if not df.empty:
                     last_row = df.iloc[-1]
-                    # Obsługa obu formatów nagłówków
                     stooq_daily = {
                         'date': str(last_row.get('<DATE>', last_row.get('Data', ''))),
                         'open': last_row.get('<OPEN>', last_row.get('Otwarcie', '')),
@@ -116,7 +121,8 @@ def company_detail(company_id):
         company=company,
         user_company=user_company,
         stooq_daily=stooq_daily,
-        upcoming_reports=upcoming_reports
+        upcoming_reports=upcoming_reports,
+        recommendations=recommendations
     )
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -160,7 +166,6 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('index'))
-
 
 if __name__ == '__main__':
     app.run(debug=True)

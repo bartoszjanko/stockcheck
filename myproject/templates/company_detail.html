@@ -16,7 +16,7 @@
 </form>
 
     <!-- Szczegóły spółki: rynek, branża, indeksy -->
-    <h3>Szczegóły spółki</h3>
+    <h3>Szczegóły</h3>
     <table class="table table-sm table-bordered" style="font-size:0.95em; min-width: 400px;">
         <tr>
             <th>Rynek</th>
@@ -38,7 +38,7 @@
         </tr>
     </table>
 
-    <h3>Nadchodzące raporty spółki</h3>
+    <h3>Nadchodzące raporty</h3>
     {% if upcoming_reports %}
         <table class="table table-sm table-bordered" style="font-size:0.95em; min-width: 400px;">
             <tr>
@@ -54,6 +54,30 @@
         </table>
     {% else %}
         <p style="color: #888;">Brak nadchodzących raportów.</p>
+    {% endif %}
+
+    <h3>Aktualne rekomendacje</h3>
+    {% if recommendations %}
+        <table class="table table-sm table-bordered" style="font-size:0.95em; min-width: 400px;">
+            <tr>
+                <th>Data</th>
+                <th>Typ rekomendacji</th>
+                <th>Cena docelowa</th>
+                <th>Cena w dniu publikacji</th>
+                <th>Instytucja</th>
+            </tr>
+            {% for rec in recommendations %}
+            <tr>
+                <td>{{ rec.publication_date }}</td>
+                <td>{{ rec.recommendation_type }}</td>
+                <td>{{ rec.target_price }}</td>
+                <td>{{ rec.publication_price }}</td>
+                <td>{{ rec.institution }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p style="color: #888;">Brak rekomendacji dla tej spółki.</p>
     {% endif %}
 
     <h3>Dane dzienne (Stooq)</h3>
@@ -78,5 +102,6 @@
         <p style="color: #888;">Brak danych dziennych ze Stooq.<br>
         <span style="font-size:0.95em;">Sprawdź czy ticker <b>{{ company.ticker|lower }}</b> jest poprawny na <a href='https://stooq.pl/q/d/?s={{ company.ticker|lower }}' target='_blank'>Stooq</a>.</span></p>
     {% endif %}
+
     <a href="/companies">Wróć do listy</a>
 {% endblock %}

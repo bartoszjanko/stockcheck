@@ -1,6 +1,7 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from myproject import db
+from datetime import datetime
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -75,3 +76,18 @@ class Industry(db.Model):
 
     def __repr__(self):
         return f'<Industry {self.industry_name}>'
+
+class Recommendation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
+    ticker = db.Column(db.String(10), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    publication_date = db.Column(db.Date, nullable=False)
+    recommendation_type = db.Column(db.String(100), nullable=False)
+    target_price = db.Column(db.String(50), nullable=True)
+    publication_price = db.Column(db.String(50), nullable=True)
+    institution = db.Column(db.String(100), nullable=True)
+    company = db.relationship('Company', backref=db.backref('recommendations', lazy=True, cascade="all, delete-orphan"))
+
+    def __repr__(self):
+        return f'<Recommendation {self.ticker} {self.publication_date} {self.recommendation_type}>'
