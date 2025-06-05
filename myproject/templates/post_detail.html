@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ post.title }}</h2>
+<p class="text-muted">Spółka: <b>{{ post.company.ticker }} - {{ post.company.name }}</b> | Autor: <b>{{ post.user.username }}</b> | Data: {{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+<div class="mb-4">{{ post.content }}</div>
+<hr>
+<h4>Komentarze</h4>
+{% for comment in post.comments %}
+    <div class="mb-3 p-2 border rounded">
+        <b>{{ comment.user.username }}</b> <span class="text-muted">({{ comment.created_at.strftime('%Y-%m-%d %H:%M') }})</span><br>
+        {{ comment.content }}
+    </div>
+{% else %}
+    <p class="text-muted">Brak komentarzy.</p>
+{% endfor %}
+<hr>
+<h5>Dodaj komentarz</h5>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.content.label(class="form-label") }}
+        {{ form.content(class="form-control", rows=3) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Dodaj komentarz</button>
+    <a href="{{ url_for('forum') }}" class="btn btn-secondary ms-2">Powrót</a>
+</form>
+{% endblock %}

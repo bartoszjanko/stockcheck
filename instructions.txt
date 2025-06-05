@@ -4,5 +4,10 @@ aktualizacja indeksow
  3. uruchomic extract_indices.py aby wyciagnac indeksy z pliku gpw_spolki.csv
 
 
-DODAC TABELE Z RODZAJAMI REKOMENDACJI, ZEBY MOZNA BYLO FILTROWAC
-DODAC ZAKLADKE Z SAMYM KALENDARIUM Z WYNIKAMI I Z SAMYMI REKOMENDAJAMI
+
+dodac role admin i normalny uzytkownik
+
+admin bedzie mial na dashboardzie statystyki bazy danych: ilosci spolek z danego rynku w bazie danych,
+informacje o ilosci raportow, rekomendacji 
+
+bedzie mogl usuwac posty na forum 

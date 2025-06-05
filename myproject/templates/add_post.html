@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dodaj post</h2>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.company.label(class="form-label") }}
+        {{ form.company(class="form-select") }}
+    </div>
+    <div class="mb-3">
+        {{ form.title.label(class="form-label") }}
+        {{ form.title(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.content.label(class="form-label") }}
+        {{ form.content(class="form-control", rows=5) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Dodaj post</button>
+    <a href="{{ url_for('forum') }}" class="btn btn-secondary ms-2">Anuluj</a>
+</form>
+{% endblock %}

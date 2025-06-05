@@ -1,8 +1,8 @@
 from flask import request, render_template, redirect, url_for, flash, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
 from myproject import create_app, db, login_manager
-from myproject.models import User, Company, UserCompany, Report
-from myproject.forms import LoginForm, RegistrationForm, AddCompanyForm
+from myproject.models import User, Company, UserCompany, Report, Recommendation, Post, Comment
+from myproject.forms import LoginForm, RegistrationForm, AddCompanyForm, PostForm, CommentForm
 import requests
 import pandas as pd
 from io import StringIO
@@ -78,7 +78,6 @@ def company_detail(company_id):
     ).order_by(Report.report_date.asc()).all()
 
     # Pobierz rekomendacje dla spółki (posortowane od najnowszej)
-    from myproject.models import Recommendation
     recommendations = Recommendation.query.filter_by(company_id=company.id).order_by(Recommendation.publication_date.desc()).all()
 
     # Pobierz dzienne dane ze Stooq
@@ -166,6 +165,89 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/reports', methods=['GET', 'POST'])
+@login_required
+def all_reports():
+    companies = Company.query.order_by(Company.ticker).all()
+    selected_company = request.args.get('company')
+    date_from = request.args.get('date_from')
+    date_to = request.args.get('date_to')
+    query = Report.query
+    if selected_company:
+        query = query.filter(Report.company_id == int(selected_company))
+    if date_from:
+        query = query.filter(Report.report_date >= date_from)
+    if date_to:
+        query = query.filter(Report.report_date <= date_to)
+    reports = query.order_by(Report.report_date.desc()).all()
+    return render_template('reports.html', reports=reports, companies=companies, selected_company=selected_company, date_from=date_from, date_to=date_to)
+
+@app.route('/recommendations', methods=['GET', 'POST'])
+@login_required
+def all_recommendations():
+    companies = Company.query.order_by(Company.ticker).all()
+    selected_company = request.args.get('company')
+    date_from = request.args.get('date_from')
+    date_to = request.args.get('date_to')
+    rec_type = request.args.get('rec_type')
+    query = Recommendation.query
+    if selected_company:
+        query = query.filter(Recommendation.company_id == int(selected_company))
+    if date_from:
+        query = query.filter(Recommendation.publication_date >= date_from)
+    if date_to:
+        query = query.filter(Recommendation.publication_date <= date_to)
+    if rec_type:
+        query = query.filter(Recommendation.recommendation_type == rec_type)
+    recommendations = query.order_by(Recommendation.publication_date.desc()).all()
+    # Pobierz unikalne typy rekomendacji do selecta
+    rec_types = [row[0] for row in db.session.query(Recommendation.recommendation_type).distinct().order_by(Recommendation.recommendation_type)]
+    return render_template('recommendations.html', recommendations=recommendations, companies=companies, selected_company=selected_company, date_from=date_from, date_to=date_to, rec_types=rec_types, rec_type=rec_type)
+
+@app.route('/forum')
+@login_required
+def forum():
+    companies = Company.query.order_by(Company.ticker).all()
+    selected_company = request.args.get('company')
+    query = Post.query.order_by(Post.created_at.desc())
+    if selected_company:
+        query = query.filter(Post.company_id == int(selected_company))
+    posts = query.all()
+    return render_template('forum.html', posts=posts, companies=companies, selected_company=selected_company)
+
+@app.route('/forum/add', methods=['GET', 'POST'])
+@login_required
+def add_post():
+    form = PostForm()
+    form.company.choices = [(c.id, f"{c.ticker} - {c.name}") for c in Company.query.order_by(Company.ticker)]
+    if form.validate_on_submit():
+        post = Post(
+            user_id=current_user.id,
+            company_id=form.company.data,
+            title=form.title.data,
+            content=form.content.data
+        )
+        db.session.add(post)
+        db.session.commit()
+        return redirect(url_for('forum'))
+    return render_template('add_post.html', form=form)
+
+@app.route('/forum/post/<int:post_id>', methods=['GET', 'POST'])
+@login_required
+def post_detail(post_id):
+    post = Post.query.get_or_404(post_id)
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(
+            post_id=post.id,
+            user_id=current_user.id,
+            content=form.content.data
+        )
+        db.session.add(comment)
+        db.session.commit()
+        return redirect(url_for('post_detail', post_id=post.id))
+    return render_template('post_detail.html', post=post, form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)

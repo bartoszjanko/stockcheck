@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Forum</h2>
+<form method="get" class="row g-3 mb-4">
+    <div class="col-md-4">
+        <label for="company" class="form-label">Spółka</label>
+        <select name="company" id="company" class="form-select">
+            <option value="">Wszystkie</option>
+            {% for company in companies %}
+                <option value="{{ company.id }}" {% if selected_company and company.id == selected_company|int %}selected{% endif %}>{{ company.ticker }} - {{ company.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-2 align-self-end">
+        <button type="submit" class="btn btn-primary w-100">Filtruj</button>
+    </div>
+    <div class="col-md-6 align-self-end text-end">
+        <a href="{{ url_for('add_post') }}" class="btn btn-success">Dodaj post</a>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tytuł</th>
+            <th>Spółka</th>
+            <th>Autor</th>
+            <th>Data</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for post in posts %}
+        <tr>
+            <td>{{ post.title }}</td>
+            <td>{{ post.company.ticker }} - {{ post.company.name }}</td>
+            <td>{{ post.user.username }}</td>
+            <td>{{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td><a href="{{ url_for('post_detail', post_id=post.id) }}" class="btn btn-sm btn-outline-primary">Zobacz</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
