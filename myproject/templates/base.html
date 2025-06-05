@@ -71,7 +71,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
         <div class="container-fluid px-4">
-            <a class="navbar-brand" href="{{ url_for('list_companies') if current_user.is_authenticated else url_for('index') }}">StockCheck</a>
+            <a class="navbar-brand" href="{{ url_for('list_companies') if current_user.is_authenticated else url_for('index') }}">Rynek360</a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -84,9 +84,6 @@
                             <a class="nav-link" href="{{ url_for('list_companies') }}">Moje Spółki</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('add_company') }}">Dodaj Spółkę</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('all_reports') }}">Raporty</a>
                         </li>
                         <li class="nav-item">
@@ -95,6 +92,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('forum') }}">Forum</a>
                         </li>
+                        {% if current_user.role == "admin" %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('admin_panel') }}">Panel admina</a>
+                        </li>
+                        {% endif %}
                     {% endif %}
                 </ul>
                 

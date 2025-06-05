@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Panel administratora</h2>
+<hr>
+<h4>Statystyki spółek wg rynku</h4>
+<ul>
+  {% for market, count in market_stats %}
+    <li><b>{{ market or 'Brak danych' }}</b>: {{ count }}</li>
+  {% endfor %}
+</ul>
+
+<h4>Statystyki spółek wg branży</h4>
+<ul>
+  {% for industry_id, count in industry_stats %}
+    <li><b>{{ industries[industry_id] if industry_id in industries else 'Brak danych' }}</b>: {{ count }}</li>
+  {% endfor %}
+</ul>
+
+<p><b>Liczba raportów:</b> {{ reports_count }}</p>
+<p><b>Liczba rekomendacji:</b> {{ recommendations_count }}</p>
+<hr>
+<h4>Najaktywniejsi użytkownicy (po liczbie postów)</h4>
+<table class="table table-sm table-bordered">
+  <thead>
+    <tr><th>Email</th><th>Nazwa użytkownika</th><th>Rola</th><th>Liczba postów</th></tr>
+  </thead>
+  <tbody>
+    {% for user, posts_count in top_users %}
+    <tr>
+      <td>{{ user.email }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.role }}</td>
+      <td>{{ posts_count }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<hr>
+<h4>Użytkownicy</h4>
+<table class="table table-sm table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Nazwa użytkownika</th>
+      <th>Rola</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.id }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.role }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,13 +1,15 @@
 from flask import request, render_template, redirect, url_for, flash, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
 from myproject import create_app, db, login_manager
-from myproject.models import User, Company, UserCompany, Report, Recommendation, Post, Comment
+from myproject.models import User, Company, UserCompany, Report, Recommendation, Post, Comment, Industry
 from myproject.forms import LoginForm, RegistrationForm, AddCompanyForm, PostForm, CommentForm
 import requests
 import pandas as pd
 from io import StringIO
 from datetime import date
 from myproject.scarp_import_reports import update_reports
+from functools import wraps
+from flask import abort
 
 app = create_app()
 
@@ -249,5 +251,60 @@ def post_detail(post_id):
         return redirect(url_for('post_detail', post_id=post.id))
     return render_template('post_detail.html', post=post, form=form)
 
+def admin_required(f):
+    from functools import wraps
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not current_user.is_authenticated or current_user.role != "admin":
+            abort(403)
+        return f(*args, **kwargs)
+    return decorated_function
+
+@app.route('/forum/post/<int:post_id>/delete', methods=['POST'])
+@login_required
+@admin_required
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect(url_for('forum'))
+
+@app.route('/forum/comment/<int:comment_id>/delete', methods=['POST'])
+@login_required
+@admin_required
+def delete_comment(comment_id):
+    comment = Comment.query.get_or_404(comment_id)
+    post_id = comment.post_id
+    db.session.delete(comment)
+    db.session.commit()
+    return redirect(url_for('post_detail', post_id=post_id))
+
+
+@app.route('/admin/panel')
+@admin_required
+def admin_panel():
+    from sqlalchemy import func
+    # Statystyki spółek wg rynku
+    market_stats = db.session.query(Company.market, func.count(Company.id)).group_by(Company.market).all()
+    # Statystyki branż
+    industry_stats = db.session.query(Company.industry_id, func.count(Company.id)).group_by(Company.industry_id).all()
+    industries = {i.id: i.industry_name for i in db.session.query(Industry).all()}
+    # Najaktywniejsi użytkownicy (po liczbie postów)
+    top_users = db.session.query(User, func.count(Post.id).label('posts_count'))\
+        .outerjoin(Post).group_by(User.id).order_by(func.count(Post.id).desc()).limit(10).all()
+    # Liczba raportów i rekomendacji
+    reports_count = Report.query.count()
+    recommendations_count = Recommendation.query.count()
+    users = User.query.all()
+    return render_template(
+        'admin_panel.html',
+        market_stats=market_stats,
+        industry_stats=industry_stats,
+        industries=industries,
+        top_users=top_users,
+        reports_count=reports_count,
+        recommendations_count=recommendations_count,
+        users=users
+    )
 if __name__ == '__main__':
     app.run(debug=True)

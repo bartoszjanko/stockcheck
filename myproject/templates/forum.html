@@ -35,7 +35,14 @@
             <td>{{ post.company.ticker }} - {{ post.company.name }}</td>
             <td>{{ post.user.username }}</td>
             <td>{{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
-            <td><a href="{{ url_for('post_detail', post_id=post.id) }}" class="btn btn-sm btn-outline-primary">Zobacz</a></td>
+            <td>
+                <a href="{{ url_for('post_detail', post_id=post.id) }}" class="btn btn-sm btn-outline-primary">Zobacz</a>
+                {% if current_user.is_authenticated and current_user.role == 'admin' %}
+                <form method="post" action="{{ url_for('delete_post', post_id=post.id) }}" style="display:inline;">
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Na pewno usunąć ten post?')">Usuń</button>
+                </form>
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}
     </tbody>
