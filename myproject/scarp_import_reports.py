@@ -38,8 +38,8 @@ def update_reports():
             continue
         report = Report(
             company_id=company.id,
-            ticker=ticker,
-            name=name,
+            #ticker=ticker,
+            #name=name,
             report_date=report_date,
             report_type=report_type
         )

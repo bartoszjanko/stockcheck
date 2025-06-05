@@ -3,3 +3,6 @@ aktualizacja indeksow
  2. wkleic do tabela_gpw.txt w identycznym formacie 
  3. uruchomic extract_indices.py aby wyciagnac indeksy z pliku gpw_spolki.csv
 
+
+DODAC TABELE Z RODZAJAMI REKOMENDACJI, ZEBY MOZNA BYLO FILTROWAC
+DODAC ZAKLADKE Z SAMYM KALENDARIUM Z WYNIKAMI I Z SAMYMI REKOMENDAJAMI

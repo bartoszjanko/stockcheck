@@ -53,8 +53,8 @@ def update_recommendations():
             continue
         rec = Recommendation(
             company_id=company.id,
-            ticker=ticker,
-            name=name,
+            #ticker=ticker,
+            #name=name,
             publication_date=publication_date,
             recommendation_type=recommendation_type,
             target_price=target_price,

@@ -54,14 +54,14 @@ class UserCompany(db.Model):
 class Report(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
-    ticker = db.Column(db.String(10), nullable=False)
-    name = db.Column(db.String(100), nullable=False)
+    #ticker = db.Column(db.String(10), nullable=False)
+    #name = db.Column(db.String(100), nullable=False)
     report_date = db.Column(db.Date, nullable=False)
     report_type = db.Column(db.String(100), nullable=False)
     company = db.relationship('Company', backref=db.backref('reports', lazy=True))
 
     def __repr__(self):
-        return f'<Report {self.ticker} {self.report_date} {self.report_type}>'
+        return f'<Report {self.company.ticker if self.company else "N/A"} {self.report_date} {self.report_type}>'
 
 class Index(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -80,8 +80,8 @@ class Industry(db.Model):
 class Recommendation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=False)
-    ticker = db.Column(db.String(10), nullable=False)
-    name = db.Column(db.String(100), nullable=False)
+    #ticker = db.Column(db.String(10), nullable=False)
+    #name = db.Column(db.String(100), nullable=False)
     publication_date = db.Column(db.Date, nullable=False)
     recommendation_type = db.Column(db.String(100), nullable=False)
     target_price = db.Column(db.String(50), nullable=True)
@@ -90,4 +90,4 @@ class Recommendation(db.Model):
     company = db.relationship('Company', backref=db.backref('recommendations', lazy=True, cascade="all, delete-orphan"))
 
     def __repr__(self):
-        return f'<Recommendation {self.ticker} {self.publication_date} {self.recommendation_type}>'
+        return f'<Recommendation {self.company.ticker if self.company else "N/A"} {self.publication_date} {self.recommendation_type}>'
