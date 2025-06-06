@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Historia transakcji</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Ticker</th>
+            <th>Nazwa spółki</th>
+            <th>Ilość</th>
+            <th>Cena</th>
+            <th>Typ</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in transactions %}
+        <tr>
+            <td>{{ t.date }}</td>
+            <td>{{ t.ticker }}</td>
+            <td>{{ names[t.ticker] if t.ticker in names else '' }}</td>
+            <td>{{ t.shares }}</td>
+            <td>{{ t.price }}</td>
+            <td>{{ t.type }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('stock_game.portfolio') }}" class="btn btn-secondary">Powrót</a>
+{% endblock %}

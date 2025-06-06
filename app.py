@@ -10,8 +10,10 @@ from datetime import date
 from myproject.scarp_import_reports import update_reports
 from functools import wraps
 from flask import abort
+from myproject.stock_game.views import bp as stock_game_bp
 
 app = create_app()
+app.register_blueprint(stock_game_bp)
 
 with app.app_context():
     # Nie uruchamiaj update_reports() ani importów jeśli nie ma jeszcze tabel
@@ -182,7 +184,7 @@ def all_reports():
         query = query.filter(Report.report_date >= date_from)
     if date_to:
         query = query.filter(Report.report_date <= date_to)
-    reports = query.order_by(Report.report_date.desc()).all()
+    reports = query.order_by(Report.report_date.asc()).all()
     return render_template('reports.html', reports=reports, companies=companies, selected_company=selected_company, date_from=date_from, date_to=date_to)
 
 @app.route('/recommendations', methods=['GET', 'POST'])

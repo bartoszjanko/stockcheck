@@ -2,6 +2,7 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from myproject import db
 from datetime import datetime
+from myproject.stock_game.models import GamePortfolio, GamePosition, GameTransaction
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Ranking graczy</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Pozycja</th>
+            <th>Użytkownik</th>
+            <th>Wartość portfela</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in ranking %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ r.username }}</td>
+            <td>{{ '%.2f' % r.total }} zł</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('stock_game.portfolio') }}" class="btn btn-secondary">Powrót</a>
+{% endblock %}

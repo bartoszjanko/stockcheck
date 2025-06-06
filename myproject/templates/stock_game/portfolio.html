@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Twój portfel gry giełdowej</h2>
+<p>Gotówka: {{ portfolio.cash }} zł</p>
+<p>Wartość portfela (z akcjami): {{ total }} zł</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ticker</th>
+            <th>Nazwa spółki</th>
+            <th>Ilość</th>
+            <th>Cena zakupu</th>
+            <th>Aktualna cena</th>
+            <th>Zysk/Strata (%)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pos in portfolio.positions %}
+        <tr>
+            <td>{{ pos.ticker }}</td>
+            <td>{{ names[pos.ticker] if pos.ticker in names else '' }}</td>
+            <td>{{ pos.shares }}</td>
+            <td>{{ pos.buy_price }}</td>
+            <td>{{ prices[pos.ticker] }}</td>
+            <td>{{ '%.2f' % pos.profit_percent(prices[pos.ticker]) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('stock_game.buy') }}" class="btn btn-success">Kup akcje</a>
+<a href="{{ url_for('stock_game.sell') }}" class="btn btn-danger">Sprzedaj akcje</a>
+<a href="{{ url_for('stock_game.history') }}" class="btn btn-info">Historia transakcji</a>
+<a href="{{ url_for('stock_game.ranking') }}" class="btn btn-primary">Ranking</a>
+{% endblock %}
