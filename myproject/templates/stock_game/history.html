@@ -17,7 +17,13 @@
         <tr>
             <td>{{ t.date }}</td>
             <td>{{ t.ticker }}</td>
-            <td>{{ names[t.ticker] if t.ticker in names else '' }}</td>
+            <td>
+              {% if t.ticker in names %}
+                {{ names[t.ticker] }}
+              {% else %}
+                <span style="color:#888;">(spółka usunięta)</span>
+              {% endif %}
+            </td>
             <td>{{ t.shares }}</td>
             <td>{{ t.price }}</td>
             <td>{{ t.type }}</td>

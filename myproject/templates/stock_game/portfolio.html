@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Twój portfel gry giełdowej</h2>
-<p>Gotówka: {{ portfolio.cash }} zł</p>
-<p>Wartość portfela (z akcjami): {{ total }} zł</p>
+<p>Gotówka: {{ '%.2f' % portfolio.cash }} zł</p>
+<p>Wartość portfela (z akcjami): {{ '%.2f' % total }} zł</p>
 <table class="table">
     <thead>
         <tr>

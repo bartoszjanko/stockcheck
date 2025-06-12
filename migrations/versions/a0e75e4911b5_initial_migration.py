@@ -1,8 +1,8 @@
-"""empty message
+"""Initial migration
 
-Revision ID: 004eaac264dd
+Revision ID: a0e75e4911b5
 Revises: 
-Create Date: 2025-06-05 01:04:51.025615
+Create Date: 2025-06-07 18:44:56.636683
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '004eaac264dd'
+revision = 'a0e75e4911b5'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,6 +35,7 @@ def upgrade():
     sa.Column('email', sa.String(length=64), nullable=True),
     sa.Column('username', sa.String(length=64), nullable=True),
     sa.Column('password_hash', sa.String(length=128), nullable=True),
+    sa.Column('role', sa.String(length=20), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('users', schema=None) as batch_op:
@@ -51,6 +52,13 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('ticker')
     )
+    op.create_table('game_portfolio',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('cash', sa.Float(), nullable=True),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('company_index',
     sa.Column('company_id', sa.Integer(), nullable=False),
     sa.Column('index_id', sa.Integer(), nullable=False),
@@ -58,11 +66,46 @@ def upgrade():
     sa.ForeignKeyConstraint(['index_id'], ['index.id'], ),
     sa.PrimaryKeyConstraint('company_id', 'index_id')
     )
+    op.create_table('game_position',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('portfolio_id', sa.Integer(), nullable=True),
+    sa.Column('company_id', sa.Integer(), nullable=True),
+    sa.Column('ticker', sa.String(length=10), nullable=True),
+    sa.Column('shares', sa.Integer(), nullable=True),
+    sa.Column('buy_price', sa.Float(), nullable=True),
+    sa.Column('buy_date', sa.Date(), nullable=True),
+    sa.Column('closed', sa.Boolean(), nullable=True),
+    sa.ForeignKeyConstraint(['company_id'], ['company.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['portfolio_id'], ['game_portfolio.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('game_transaction',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('portfolio_id', sa.Integer(), nullable=True),
+    sa.Column('company_id', sa.Integer(), nullable=True),
+    sa.Column('ticker', sa.String(length=10), nullable=True),
+    sa.Column('shares', sa.Integer(), nullable=True),
+    sa.Column('price', sa.Float(), nullable=True),
+    sa.Column('date', sa.Date(), nullable=True),
+    sa.Column('type', sa.String(length=10), nullable=True),
+    sa.ForeignKeyConstraint(['company_id'], ['company.id'], ondelete='SET NULL'),
+    sa.ForeignKeyConstraint(['portfolio_id'], ['game_portfolio.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('post',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('company_id', sa.Integer(), nullable=False),
+    sa.Column('title', sa.String(length=200), nullable=False),
+    sa.Column('content', sa.Text(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['company_id'], ['company.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     op.create_table('recommendation',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('company_id', sa.Integer(), nullable=False),
-    sa.Column('ticker', sa.String(length=10), nullable=False),
-    sa.Column('name', sa.String(length=100), nullable=False),
     sa.Column('publication_date', sa.Date(), nullable=False),
     sa.Column('recommendation_type', sa.String(length=100), nullable=False),
     sa.Column('target_price', sa.String(length=50), nullable=True),
@@ -74,8 +117,6 @@ def upgrade():
     op.create_table('report',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('company_id', sa.Integer(), nullable=False),
-    sa.Column('ticker', sa.String(length=10), nullable=False),
-    sa.Column('name', sa.String(length=100), nullable=False),
     sa.Column('report_date', sa.Date(), nullable=False),
     sa.Column('report_type', sa.String(length=100), nullable=False),
     sa.ForeignKeyConstraint(['company_id'], ['company.id'], ),
@@ -92,15 +133,30 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('comment',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('post_id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('content', sa.Text(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['post_id'], ['post.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
     # ### end Alembic commands ###
 
 
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
+    op.drop_table('comment')
     op.drop_table('user_company')
     op.drop_table('report')
     op.drop_table('recommendation')
+    op.drop_table('post')
+    op.drop_table('game_transaction')
+    op.drop_table('game_position')
     op.drop_table('company_index')
+    op.drop_table('game_portfolio')
     op.drop_table('company')
     with op.batch_alter_table('users', schema=None) as batch_op:
         batch_op.drop_index(batch_op.f('ix_users_username'))

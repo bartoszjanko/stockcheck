@@ -7,43 +7,17 @@ from myproject import db
 from datetime import date
 import csv
 import os
-from myproject.models import User
+from myproject.models import User, Company
 
 bp = Blueprint('stock_game', __name__, url_prefix='/game')
-
-@bp.route('/portfolio')
-@login_required
-def portfolio():
-    # Wczytaj tickery i nazwy spółek
-    tickers_path = os.path.join(os.path.dirname(__file__), 'tickers.csv')
-    names = {}
-    with open(tickers_path, newline='', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            names[row['ticker']] = row['name']
-    db_portfolio = GamePortfolio.query.filter_by(user_id=current_user.id).first()
-    if not db_portfolio:
-        db_portfolio = GamePortfolio(user_id=current_user.id)
-        db.session.add(db_portfolio)
-        db.session.commit()
-    db_positions = GamePosition.query.filter_by(portfolio_id=db_portfolio.id).all()
-    positions = [Position(p.ticker, p.shares, p.buy_price, p.buy_date) for p in db_positions]
-    prices = get_prices_for_positions(positions)
-    portfolio = Portfolio(db_portfolio.cash, positions)
-    total = portfolio.total_value(prices)
-    return render_template('stock_game/portfolio.html', portfolio=portfolio, prices=prices, total=total, names=names)
 
 @bp.route('/buy', methods=['GET', 'POST'])
 @login_required
 def buy():
-    tickers = []
-    names = {}
-    tickers_path = os.path.join(os.path.dirname(__file__), 'tickers.csv')
-    with open(tickers_path, newline='', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            tickers.append(row['ticker'])
-            names[row['ticker']] = row['name']
+    # Pobierz tickery i nazwy spółek z bazy danych
+    companies = Company.query.order_by(Company.name).all()
+    tickers = [c.ticker for c in companies]
+    names = {c.ticker: c.name for c in companies}
     if request.method == 'POST':
         ticker = request.form.get('ticker')
         shares = int(request.form.get('shares'))
@@ -57,9 +31,12 @@ def buy():
             flash('Brak środków na zakup.')
             return redirect(url_for('stock_game.buy'))
         db_portfolio.cash -= cost
-        position = GamePosition(portfolio_id=db_portfolio.id, ticker=ticker, shares=shares, buy_price=price, buy_date=date.today())
+        # Pobierz company_id na podstawie tickera
+        company = Company.query.filter_by(ticker=ticker).first()
+        company_id = company.id if company else None
+        position = GamePosition(portfolio_id=db_portfolio.id, ticker=ticker, shares=shares, buy_price=price, buy_date=date.today(), company_id=company_id)
         db.session.add(position)
-        db.session.add(GameTransaction(portfolio_id=db_portfolio.id, ticker=ticker, shares=shares, price=price, date=date.today(), type='buy'))
+        db.session.add(GameTransaction(portfolio_id=db_portfolio.id, ticker=ticker, shares=shares, price=price, date=date.today(), type='buy', company_id=company_id))
         db.session.commit()
         flash('Zakupiono akcje!')
         return redirect(url_for('stock_game.portfolio'))
@@ -68,15 +45,12 @@ def buy():
 @bp.route('/sell', methods=['GET', 'POST'])
 @login_required
 def sell():
-    # Wczytaj tickery i nazwy spółek
-    tickers_path = os.path.join(os.path.dirname(__file__), 'tickers.csv')
-    names = {}
-    with open(tickers_path, newline='', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            names[row['ticker']] = row['name']
+    # Pobierz tickery i nazwy spółek z bazy danych, tylko te które użytkownik posiada
     db_portfolio = GamePortfolio.query.filter_by(user_id=current_user.id).first()
     db_positions = GamePosition.query.filter_by(portfolio_id=db_portfolio.id).all()
+    companies = Company.query.filter(Company.ticker.in_([p.ticker for p in db_positions])).all()
+    tickers = [c.ticker for c in companies]
+    names = {c.ticker: c.name for c in companies}
     if request.method == 'POST':
         ticker = request.form.get('ticker')
         shares = int(request.form.get('shares'))
@@ -96,19 +70,39 @@ def sell():
         db.session.commit()
         flash('Sprzedano akcje!')
         return redirect(url_for('stock_game.portfolio'))
-    tickers = [p.ticker for p in db_positions]
     return render_template('stock_game/sell.html', tickers=tickers, names=names)
+
+@bp.route('/portfolio')
+@login_required
+def portfolio():
+    # Pobierz tickery i nazwy spółek z bazy danych
+    companies = Company.query.order_by(Company.name).all()
+    names = {c.ticker: c.name for c in companies}
+    db_portfolio = GamePortfolio.query.filter_by(user_id=current_user.id).first()
+    if not db_portfolio:
+        db_portfolio = GamePortfolio(user_id=current_user.id)
+        db.session.add(db_portfolio)
+        db.session.commit()
+    # Zamknij pozycje, gdzie spółka została usunięta z bazy
+    db_positions = GamePosition.query.filter_by(portfolio_id=db_portfolio.id, closed=False).all()
+    for pos in db_positions:
+        if pos.company_id is None and not pos.closed:
+            pos.closed = True
+    db.session.commit()
+    # Pobierz tylko otwarte pozycje do wyświetlenia
+    open_positions = [p for p in db_positions if not p.closed]
+    positions = [Position(p.ticker, p.shares, p.buy_price, p.buy_date) for p in open_positions]
+    prices = get_prices_for_positions(positions)
+    portfolio = Portfolio(db_portfolio.cash, positions)
+    total = portfolio.total_value(prices)
+    return render_template('stock_game/portfolio.html', portfolio=portfolio, prices=prices, total=total, names=names)
 
 @bp.route('/history')
 @login_required
 def history():
-    # Wczytaj tickery i nazwy spółek
-    tickers_path = os.path.join(os.path.dirname(__file__), 'tickers.csv')
-    names = {}
-    with open(tickers_path, newline='', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            names[row['ticker']] = row['name']
+    # Pobierz tickery i nazwy spółek z bazy danych
+    companies = Company.query.order_by(Company.name).all()
+    names = {c.ticker: c.name for c in companies}
     db_portfolio = GamePortfolio.query.filter_by(user_id=current_user.id).first()
     transactions = GameTransaction.query.filter_by(portfolio_id=db_portfolio.id).order_by(GameTransaction.date.desc()).all()
     return render_template('stock_game/history.html', transactions=transactions, names=names)
@@ -116,13 +110,9 @@ def history():
 @bp.route('/ranking')
 @login_required
 def ranking():
-    # Wczytaj tickery i nazwy spółek
-    tickers_path = os.path.join(os.path.dirname(__file__), 'tickers.csv')
-    names = {}
-    with open(tickers_path, newline='', encoding='utf-8') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            names[row['ticker']] = row['name']
+    # Pobierz tickery i nazwy spółek z bazy danych
+    companies = Company.query.order_by(Company.name).all()
+    names = {c.ticker: c.name for c in companies}
     portfolios = GamePortfolio.query.all()
     ranking_list = []
     for p in portfolios:
@@ -133,8 +123,6 @@ def ranking():
         total = portfolio.total_value(prices)
         user = User.query.get(p.user_id)
         username = user.username if user else f"Użytkownik {p.user_id}"
-        # Dodajemy listę pozycji z nazwami spółek
-        pos_list = [{'ticker': pos.ticker, 'name': names.get(pos.ticker, ''), 'shares': pos.shares} for pos in positions]
-        ranking_list.append({'username': username, 'total': total, 'positions': pos_list})
+        ranking_list.append({'username': username, 'total': total})
     ranking_list.sort(key=lambda x: x['total'], reverse=True)
-    return render_template('stock_game/ranking.html', ranking=ranking_list)
+    return render_template('stock_game/ranking.html', ranking=ranking_list, names=names)
