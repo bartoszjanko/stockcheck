@@ -9,11 +9,13 @@ To czysta logika biznesowa, zgodna z zasadami programowania obiektowego.
 
 # Reprezentuje pojedynczą inwestycję w akcje danej spółki.
 class Position:
-    def __init__(self, ticker, shares, buy_price, buy_date):
+    def __init__(self, ticker, shares, buy_price, buy_date, value=None, profit_percent=None):
         self.ticker = ticker
         self.shares = shares
         self.buy_price = buy_price
         self.buy_date = buy_date
+        self.value = value
+        self.profit_percent = profit_percent
 
     def current_value(self, current_price):
         return self.shares * current_price

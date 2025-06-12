@@ -11,6 +11,7 @@
             <th>Ilość</th>
             <th>Cena zakupu</th>
             <th>Aktualna cena</th>
+            <th>Wartość pozycji</th>
             <th>Zysk/Strata (%)</th>
         </tr>
     </thead>
@@ -20,9 +21,12 @@
             <td>{{ pos.ticker }}</td>
             <td>{{ names[pos.ticker] if pos.ticker in names else '' }}</td>
             <td>{{ pos.shares }}</td>
-            <td>{{ pos.buy_price }}</td>
-            <td>{{ prices[pos.ticker] }}</td>
-            <td>{{ '%.2f' % pos.profit_percent(prices[pos.ticker]) }}</td>
+            <td>{{ '%.2f' % pos.buy_price }}</td>
+            <td>{{ '%.2f' % prices[pos.ticker] }}</td>
+            <td>{{ '%.2f' % pos.value }}</td>
+            <td class="{% if pos.profit_percent >= 0 %}text-success{% else %}text-danger{% endif %}">
+                {{ '%.2f' % pos.profit_percent }}%
+            </td>
         </tr>
         {% endfor %}
     </tbody>

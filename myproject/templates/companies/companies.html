@@ -4,8 +4,8 @@
     <h2>Lista spółek</h2>
     <ul>
     {% for c in companies %}
-        <li><a href="/company/{{ c.id }}">{{ c.name }} ({{ c.ticker }})</a></li>
+        <li><a href="/companies/{{ c.id }}">{{ c.name }} ({{ c.ticker }})</a></li>
     {% endfor %}
     </ul>
-    <a class="btn btn-primary" href="/add_company">Dodaj spółkę</a>
+    <a class="btn btn-primary" href="/companies/add">Dodaj spółkę</a>
 {% endblock %}

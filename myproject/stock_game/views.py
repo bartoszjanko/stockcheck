@@ -92,11 +92,38 @@ def portfolio():
     db.session.commit()
     # Pobierz tylko otwarte pozycje do wyświetlenia
     open_positions = [p for p in db_positions if not p.closed]
-    positions = [Position(p.ticker, p.shares, p.buy_price, p.buy_date) for p in open_positions]
+    positions = [
+        Position(pos.ticker, pos.shares, pos.buy_price, pos.buy_date)
+        for pos in open_positions
+    ]
     prices = get_prices_for_positions(positions)
+
+    for pos in open_positions:
+        pos.value = pos.shares * prices[pos.ticker]
+        pos.profit_percent = ((prices[pos.ticker] - pos.buy_price) / pos.buy_price) * 100
+
+    positions = [
+        Position(
+            ticker=p.ticker,
+            shares=p.shares,
+            buy_price=p.buy_price,
+            buy_date=p.buy_date,
+            value=p.value,
+            profit_percent=p.profit_percent
+        )
+        for p in open_positions
+    ]
+
     portfolio = Portfolio(db_portfolio.cash, positions)
     total = portfolio.total_value(prices)
-    return render_template('stock_game/portfolio.html', portfolio=portfolio, prices=prices, total=total, names=names)
+
+    return render_template(
+        'stock_game/portfolio.html',
+        portfolio=portfolio,
+        prices=prices,
+        total=total,
+        names=names
+    )
 
 @stock_game.route('/history')
 @login_required
