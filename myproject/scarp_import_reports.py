@@ -2,7 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 from datetime import datetime
-from myproject.models import Company, Report
+from myproject.companies.models import Company
+from myproject.reports.models import Report
 from myproject import db
 
 def update_reports():
@@ -38,8 +39,6 @@ def update_reports():
             continue
         report = Report(
             company_id=company.id,
-            #ticker=ticker,
-            #name=name,
             report_date=report_date,
             report_type=report_type
         )

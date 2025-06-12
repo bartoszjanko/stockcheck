@@ -119,7 +119,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
         <div class="container-fluid px-4">
-            <a class="navbar-brand" href="{{ url_for('list_companies') if current_user.is_authenticated else url_for('index') }}">Rynek360</a>
+            <a class="navbar-brand" href="{{ url_for('companies.list_companies') if current_user.is_authenticated else url_for('core.index') }}">Rynek360</a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -129,35 +129,38 @@
                 <ul class="navbar-nav me-auto">
                     {% if current_user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('list_companies') }}">Moje Spółki</a>
+                            <a class="nav-link" href="{{ url_for('companies.list_companies') }}">Moje Spółki</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('all_reports') }}">Raporty</a>
+                            <a class="nav-link" href="{{ url_for('reports.all_reports') }}">Raporty</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('all_recommendations') }}">Rekomendacje</a>
+                            <a class="nav-link" href="{{ url_for('recommendations.all_recommendations') }}">Rekomendacje</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('forum') }}">Forum</a>
+                            <a class="nav-link" href="{{ url_for('forum.forum_main') }}">Forum</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('stock_game.portfolio') }}">Gra Giełdowa</a>
                         </li>
                         {% if current_user.role == "admin" %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('admin_panel') }}">Panel admina</a>
+                            <a class="nav-link" href="{{ url_for('admin.admin_panel') }}">Panel admina</a>
                         </li>
                         {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('core.info') }}">Info</a>
+                        </li>
                     {% endif %}
                 </ul>
                 
                 <div class="ms-auto">
                     {% if current_user.is_authenticated %}
                         <span class="navbar-text me-3">Witaj, {{ current_user.username }}!</span>
-                        <a class="btn btn-outline-light btn-sm" href="{{ url_for('logout') }}">Wyloguj</a>
+                        <a class="btn btn-outline-light btn-sm" href="{{ url_for('auth.logout') }}">Wyloguj</a>
                     {% else %}
-                        <a class="btn btn-outline-light btn-sm me-2" href="{{ url_for('login') }}">Zaloguj</a>
-                        <a class="btn btn-light btn-sm" href="{{ url_for('register') }}">Zarejestruj</a>
+                        <a class="btn btn-outline-light btn-sm me-2" href="{{ url_for('auth.login') }}">Zaloguj</a>
+                        <a class="btn btn-light btn-sm" href="{{ url_for('auth.register') }}">Zarejestruj</a>
                     {% endif %}
                 </div>
             </div>

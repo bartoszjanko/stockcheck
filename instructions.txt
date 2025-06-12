@@ -1,13 +1,9 @@
-aktualizacja indeksow
- 1. skopiowac tabele z gpw.pl/spolki
- 2. wkleic do tabela_gpw.txt w identycznym formacie 
- 3. uruchomic extract_indices.py aby wyciagnac indeksy z pliku gpw_spolki.csv
+Instrukcja aktualizacji spółek:
+
+1. Skopiuj dane źródłowe do wse_stocks_raw.txt i nc_stocks_raw.txt.
+2. Uruchom skrypty w notebook data_processing.ipynb, aby przetworzyć dane i wygenerować pliki CSV.
+3. Uruchom skrypt import_stocks_data.py, aby zapisać spółki do bazy danych 
 
 
 
-dodac role admin i normalny uzytkownik
 
-admin bedzie mial na dashboardzie statystyki bazy danych: ilosci spolek z danego rynku w bazie danych,
-informacje o ilosci raportow, rekomendacji 
-
-bedzie mogl usuwac posty na forum 

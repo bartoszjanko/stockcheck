@@ -10,7 +10,7 @@
         <b>{{ comment.user.username }}</b> <span class="text-muted">({{ comment.created_at.strftime('%Y-%m-%d %H:%M') }})</span><br>
         {{ comment.content }}
         {% if current_user.is_authenticated and current_user.role == 'admin' %}
-        <form method="post" action="{{ url_for('delete_comment', comment_id=comment.id) }}" style="display:inline;">
+        <form method="post" action="{{ url_for('forum.delete_comment', comment_id=comment.id) }}" style="display:inline;">
             <button type="submit" class="btn btn-sm btn-danger ms-2" onclick="return confirm('Na pewno usunąć ten komentarz?')">Usuń</button>
         </form>
         {% endif %}
@@ -27,6 +27,6 @@
         {{ form.content(class="form-control", rows=3) }}
     </div>
     <button type="submit" class="btn btn-primary">Dodaj komentarz</button>
-    <a href="{{ url_for('forum') }}" class="btn btn-secondary ms-2">Powrót</a>
+    <a href="{{ url_for('forum.forum_main') }}" class="btn btn-secondary ms-2">Powrót</a>
 </form>
 {% endblock %}

@@ -3,7 +3,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import re
 from datetime import datetime
-from myproject.models import Company, Recommendation
+from myproject.companies.models import Company
+from myproject.recommendations.models import Recommendation
 from myproject import db
 
 def parse_name_and_ticker(cell):
@@ -53,8 +54,6 @@ def update_recommendations():
             continue
         rec = Recommendation(
             company_id=company.id,
-            #ticker=ticker,
-            #name=name,
             publication_date=publication_date,
             recommendation_type=recommendation_type,
             target_price=target_price,

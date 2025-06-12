@@ -16,6 +16,6 @@
         {{ form.content(class="form-control", rows=5) }}
     </div>
     <button type="submit" class="btn btn-primary">Dodaj post</button>
-    <a href="{{ url_for('forum') }}" class="btn btn-secondary ms-2">Anuluj</a>
+    <a href="{{ url_for('forum.forum_main') }}" class="btn btn-secondary ms-2">Anuluj</a>
 </form>
 {% endblock %}

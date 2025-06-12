@@ -1,12 +1,12 @@
 import pandas as pd
 from myproject import create_app, db
-from myproject.models import Company, Industry, Index, company_index
+from myproject.companies.models import Company, Index, Industry, company_index
 
 app = create_app()
 
 def import_companies():
-    df_wse = pd.read_csv('wse_stocks.csv')
-    df_nc = pd.read_csv('nc_stocks.csv')
+    df_wse = pd.read_csv('/wse_stocks.csv')
+    df_nc = pd.read_csv('/nc_stocks.csv')
     df = pd.concat([df_wse, df_nc], ignore_index=True)
     for _, row in df.iterrows():
         ticker = str(row['ticker']).strip()

@@ -7,11 +7,12 @@ from myproject import db
 from datetime import date
 import csv
 import os
-from myproject.models import User, Company
+from myproject.companies.models import Company
+from myproject.auth.models import User
 
-bp = Blueprint('stock_game', __name__, url_prefix='/game')
+from . import stock_game
 
-@bp.route('/buy', methods=['GET', 'POST'])
+@stock_game.route('/buy', methods=['GET', 'POST'])
 @login_required
 def buy():
     # Pobierz tickery i nazwy spółek z bazy danych
@@ -42,7 +43,7 @@ def buy():
         return redirect(url_for('stock_game.portfolio'))
     return render_template('stock_game/buy.html', tickers=tickers, names=names)
 
-@bp.route('/sell', methods=['GET', 'POST'])
+@stock_game.route('/sell', methods=['GET', 'POST'])
 @login_required
 def sell():
     # Pobierz tickery i nazwy spółek z bazy danych, tylko te które użytkownik posiada
@@ -72,7 +73,7 @@ def sell():
         return redirect(url_for('stock_game.portfolio'))
     return render_template('stock_game/sell.html', tickers=tickers, names=names)
 
-@bp.route('/portfolio')
+@stock_game.route('/portfolio')
 @login_required
 def portfolio():
     # Pobierz tickery i nazwy spółek z bazy danych
@@ -97,7 +98,7 @@ def portfolio():
     total = portfolio.total_value(prices)
     return render_template('stock_game/portfolio.html', portfolio=portfolio, prices=prices, total=total, names=names)
 
-@bp.route('/history')
+@stock_game.route('/history')
 @login_required
 def history():
     # Pobierz tickery i nazwy spółek z bazy danych
@@ -107,7 +108,7 @@ def history():
     transactions = GameTransaction.query.filter_by(portfolio_id=db_portfolio.id).order_by(GameTransaction.date.desc()).all()
     return render_template('stock_game/history.html', transactions=transactions, names=names)
 
-@bp.route('/ranking')
+@stock_game.route('/ranking')
 @login_required
 def ranking():
     # Pobierz tickery i nazwy spółek z bazy danych
