@@ -1,4 +1,3 @@
-
 from flask import render_template, request, redirect, url_for, flash, Blueprint
 from flask_login import login_required, current_user
 from myproject.forum.models import Post, Comment
@@ -17,8 +16,13 @@ def forum_main():
     query = Post.query.order_by(Post.created_at.desc())
     if selected_company:
         query = query.filter(Post.company_id == int(selected_company))
-    posts = query.all()
-    return render_template('/forum/forum.html', posts=posts, companies=companies, selected_company=selected_company)
+    
+    page = request.args.get('page', 1, type=int)
+    per_page = 20
+    posts_pagination = query.paginate(page=page, per_page=per_page, error_out=False)
+    posts = posts_pagination.items
+    
+    return render_template('/forum/forum.html', posts=posts, companies=companies, selected_company=selected_company, pagination=posts_pagination)
 
 @forum.route('/add', methods=['GET', 'POST'])
 @login_required

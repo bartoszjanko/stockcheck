@@ -4,7 +4,7 @@ from .models import GamePortfolio, GamePosition, GameTransaction
 from .domain import Portfolio, Position
 from .services import get_latest_price, get_prices_for_positions
 from myproject import db
-from datetime import date
+from datetime import datetime
 import csv
 import os
 from myproject.companies.models import Company
@@ -35,9 +35,9 @@ def buy():
         # Pobierz company_id na podstawie tickera
         company = Company.query.filter_by(ticker=ticker).first()
         company_id = company.id if company else None
-        position = GamePosition(portfolio_id=db_portfolio.id, ticker=ticker, shares=shares, buy_price=price, buy_date=date.today(), company_id=company_id)
+        position = GamePosition(portfolio_id=db_portfolio.id, ticker=ticker, shares=shares, buy_price=price, buy_date=datetime.now(), company_id=company_id)
         db.session.add(position)
-        db.session.add(GameTransaction(portfolio_id=db_portfolio.id, ticker=ticker, shares=shares, price=price, date=date.today(), type='buy', company_id=company_id))
+        db.session.add(GameTransaction(portfolio_id=db_portfolio.id, ticker=ticker, shares=shares, price=price, date=datetime.now(), type='buy', company_id=company_id))
         db.session.commit()
         flash('Zakupiono akcje!')
         return redirect(url_for('stock_game.portfolio'))
@@ -67,7 +67,7 @@ def sell():
         if position.shares == 0:
             db.session.delete(position)
         db_portfolio.cash += price * shares
-        db.session.add(GameTransaction(portfolio_id=db_portfolio.id, ticker=ticker, shares=shares, price=price, date=date.today(), type='sell'))
+        db.session.add(GameTransaction(portfolio_id=db_portfolio.id, ticker=ticker, shares=shares, price=price, date=datetime.now(), type='sell'))
         db.session.commit()
         flash('Sprzedano akcje!')
         return redirect(url_for('stock_game.portfolio'))

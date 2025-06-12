@@ -9,13 +9,14 @@
             <th>Nazwa spółki</th>
             <th>Ilość</th>
             <th>Cena</th>
+            <th>Wartość</th>
             <th>Typ</th>
         </tr>
     </thead>
     <tbody>
         {% for t in transactions %}
         <tr>
-            <td>{{ t.date }}</td>
+            <td>{{ t.date.strftime('%d-%m-%Y %H:%M') if t.date else t.date }}</td>
             <td>{{ t.ticker }}</td>
             <td>
               {% if t.ticker in names %}
@@ -26,6 +27,7 @@
             </td>
             <td>{{ t.shares }}</td>
             <td>{{ t.price }}</td>
+            <td>{{ t.price * t.shares }}</td>
             <td>{{ t.type }}</td>
         </tr>
         {% endfor %}

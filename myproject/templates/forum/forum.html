@@ -34,7 +34,7 @@
             <td>{{ post.title }}</td>
             <td>{{ post.company.ticker }} - {{ post.company.name }}</td>
             <td>{{ post.user.username }}</td>
-            <td>{{ post.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td>{{ post.created_at.strftime('%d-%m-%Y %H:%M') }}</td>
             <td>
                 <a href="{{ url_for('forum.post_detail', post_id=post.id) }}" class="btn btn-sm btn-outline-primary">Zobacz</a>
                 {% if current_user.is_authenticated and current_user.role == 'admin' %}
@@ -47,4 +47,47 @@
     {% endfor %}
     </tbody>
 </table>
+{% if pagination is defined %}
+<nav aria-label="Paginacja">
+  <ul class="pagination justify-content-center">
+    {% set start = pagination.page - 2 if pagination.page - 2 > 0 else 1 %}
+    {% set end = pagination.page + 2 if pagination.page + 2 <= pagination.pages else pagination.pages %}
+    {% if pagination.has_prev %}
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for(request.endpoint, page=1, company=selected_company) }}">&laquo;</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for(request.endpoint, page=pagination.prev_num, company=selected_company) }}">&lsaquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+      <li class="page-item disabled"><span class="page-link">&lsaquo;</span></li>
+    {% endif %}
+    {% if start > 1 %}
+      <li class="page-item disabled"><span class="page-link">...</span></li>
+    {% endif %}
+    {% for p in range(start, end + 1) %}
+      {% if p == pagination.page %}
+        <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="{{ url_for(request.endpoint, page=p, company=selected_company) }}">{{ p }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if end < pagination.pages %}
+      <li class="page-item disabled"><span class="page-link">...</span></li>
+    {% endif %}
+    {% if pagination.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for(request.endpoint, page=pagination.next_num, company=selected_company) }}">&rsaquo;</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for(request.endpoint, page=pagination.pages, company=selected_company) }}">&raquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&rsaquo;</span></li>
+      <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
 {% endblock %}

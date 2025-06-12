@@ -21,6 +21,9 @@ def all_reports():
         query = query.filter(Report.report_date >= date_from)
     if date_to:
         query = query.filter(Report.report_date <= date_to)
-    reports = query.order_by(Report.report_date.asc()).all()
-    return render_template('reports/reports.html', reports=reports, companies=companies, selected_company=selected_company, date_from=date_from, date_to=date_to)
+    page = request.args.get('page', 1, type=int)
+    per_page = 20
+    reports_pagination = query.order_by(Report.report_date.asc()).paginate(page=page, per_page=per_page, error_out=False)
+    reports = reports_pagination.items
+    return render_template('reports/reports.html', reports=reports, companies=companies, selected_company=selected_company, date_from=date_from, date_to=date_to, pagination=reports_pagination)
 

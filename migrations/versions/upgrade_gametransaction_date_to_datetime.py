@@ -3,7 +3,7 @@ Upgrade GameTransaction.date from Date to DateTime
 """
 
 revision = '20250607_1'
-down_revision = 'eb16825efeec'
+down_revision = 'a0e75e4911b5'
 branch_labels = None
 depends_on = None
 

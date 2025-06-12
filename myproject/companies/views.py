@@ -5,6 +5,7 @@ from datetime import date
 import pandas as pd
 from io import StringIO
 import requests
+from sqlalchemy.orm import selectinload
 
 from myproject.companies.models import Company, UserCompany
 from myproject.companies.forms import AddCompanyForm
@@ -60,8 +61,31 @@ def company_detail(company_id):
         Report.report_date >= date.today()
     ).order_by(Report.report_date.asc()).all()
 
-    # Pobierz rekomendacje dla spółki (posortowane od najnowszej)
-    recommendations = Recommendation.query.filter_by(company_id=company.id).order_by(Recommendation.publication_date.desc()).all()
+    # Pobierz rekomendacje dla spółki (posortowane od najnowszej) z eager loadingiem relacji company
+    recommendations = Recommendation.query.options(selectinload(Recommendation.company)).filter_by(company_id=company.id).order_by(Recommendation.publication_date.desc()).all()
+
+    # Dodaj aktualne ceny do rekomendacji (jak w recommendations.views)
+    def get_stooq_price(ticker):
+        if not ticker:
+            return None
+        url = f'https://stooq.pl/q/l/?s={ticker.lower()}&f=sd2t2ohlcv&h&e=csv'
+        try:
+            response = requests.get(url, timeout=5)
+            if response.status_code == 200:
+                lines = response.text.splitlines()
+                if len(lines) > 1:
+                    price = lines[1].split(',')[6]
+                    try:
+                        return float(price)
+                    except Exception:
+                        return None
+        except Exception:
+            return None
+        return None
+    current_prices = {}
+    for rec in recommendations:
+        ticker = rec.company.ticker if rec.company else None
+        current_prices[rec.id] = get_stooq_price(ticker)
 
     # Pobierz dzienne dane ze Stooq
     stooq_daily = None
@@ -104,5 +128,6 @@ def company_detail(company_id):
         user_company=user_company,
         stooq_daily=stooq_daily,
         upcoming_reports=upcoming_reports,
-        recommendations=recommendations
+        recommendations=recommendations,
+        current_prices=current_prices
     )

@@ -32,30 +32,124 @@
         <button type="submit" class="btn btn-primary w-100">Filtruj</button>
     </div>
 </form>
+{% set pagination = pagination if pagination is defined else None %}
 <table class="table">
     <thead>
         <tr>
             <th>Spółka</th>
             <th>Ticker</th>
-            <th>Data publikacji</th>
             <th>Typ rekomendacji</th>
+            <th>Cena aktualna</th>
             <th>Cena docelowa</th>
+            <th>Potencjał zmiany ceny (%)</th>
             <th>Cena w dniu publikacji</th>
             <th>Instytucja</th>
+            <th>Data publikacji</th>
         </tr>
     </thead>
     <tbody>
-    {% for rec in recommendations %}
+    {% if pagination %}
+        {% for rec in pagination.items %}
         <tr>
             <td>{{ rec.company.name if rec.company else 'N/A' }}</td>
             <td>{{ rec.company.ticker if rec.company else 'N/A' }}</td>
-            <td>{{ rec.publication_date }}</td>
             <td>{{ rec.recommendation_type }}</td>
+            <td>{% set price = current_prices.get(rec.id) %}{{ '{:,.2f}'.format(price).replace(',', ' ') ~ ' zł' if price is not none else '—' }}</td>
             <td>{{ rec.target_price }}</td>
+            <td>
+                {% set price = current_prices.get(rec.id) %}
+                {% set target_price_str = rec.target_price|string %}
+                {% set target_price_clean = target_price_str.replace('zł', '').replace(' ', '').replace(',', '.') %}
+                {% set target_price = target_price_clean|float %}
+                {% if price is not none and price > 0 and target_price_str and target_price > 0 %}
+                    {% set potential = ((target_price - price) / price * 100) %}
+                    {% if potential >= 0 %}
+                        <span class="fw-bold text-success">{{ '%.2f'|format(potential) }}%</span>
+                    {% else %}
+                        <span class="fw-bold text-danger">{{ '%.2f'|format(potential) }}%</span>
+                    {% endif %}
+                {% else %}
+                    —
+                {% endif %}
+            </td>
             <td>{{ rec.publication_price }}</td>
             <td>{{ rec.institution }}</td>
+            <td>{{ rec.publication_date.strftime('%d-%m-%Y') if rec.publication_date else rec.publication_date }}</td>
         </tr>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        {% for rec in recommendations %}
+        <tr>
+            <td>{{ rec.company.name if rec.company else 'N/A' }}</td>
+            <td>{{ rec.company.ticker if rec.company else 'N/A' }}</td>
+            <td>{{ rec.recommendation_type }}</td>
+            <td>{% set price = current_prices.get(rec.id) %}{{ '{:,.2f}'.format(price).replace(',', ' ') ~ ' zł' if price is not none else '—' }}</td>
+            <td>{{ rec.target_price }}</td>
+            <td>
+                {% set price = current_prices.get(rec.id) %}
+                {% set target_price_str = rec.target_price|string %}
+                {% set target_price_clean = target_price_str.replace('zł', '').replace(' ', '').replace(',', '.') %}
+                {% set target_price = target_price_clean|float %}
+                {% if price is not none and price > 0 and target_price_str and target_price > 0 %}
+                    {% set potential = ((target_price - price) / price * 100) %}
+                    {% if potential >= 0 %}
+                        <span class="fw-bold text-success">{{ '%.2f'|format(potential) }}%</span>
+                    {% else %}
+                        <span class="fw-bold text-danger">{{ '%.2f'|format(potential) }}%</span>
+                    {% endif %}
+                {% else %}
+                    —
+                {% endif %}
+            </td>
+            <td>{{ rec.publication_price }}</td>
+            <td>{{ rec.institution }}</td>
+            <td>{{ rec.publication_date.strftime('%d-%m-%Y') if rec.publication_date else rec.publication_date }}</td>
+        </tr>
+        {% endfor %}
+    {% endif %}
     </tbody>
 </table>
+{% if pagination %}
+<nav aria-label="Paginacja">
+  <ul class="pagination justify-content-center">
+    {% set start = pagination.page - 2 if pagination.page - 2 > 0 else 1 %}
+    {% set end = pagination.page + 2 if pagination.page + 2 <= pagination.pages else pagination.pages %}
+    {% if pagination.has_prev %}
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for(request.endpoint, page=1, company=selected_company, date_from=date_from, date_to=date_to, rec_type=rec_type) }}">&laquo;</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for(request.endpoint, page=pagination.prev_num, company=selected_company, date_from=date_from, date_to=date_to, rec_type=rec_type) }}">&lsaquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+      <li class="page-item disabled"><span class="page-link">&lsaquo;</span></li>
+    {% endif %}
+    {% if start > 1 %}
+      <li class="page-item disabled"><span class="page-link">...</span></li>
+    {% endif %}
+    {% for p in range(start, end + 1) %}
+      {% if p == pagination.page %}
+        <li class="page-item active"><span class="page-link">{{ p }}</span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="{{ url_for(request.endpoint, page=p, company=selected_company, date_from=date_from, date_to=date_to, rec_type=rec_type) }}">{{ p }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if end < pagination.pages %}
+      <li class="page-item disabled"><span class="page-link">...</span></li>
+    {% endif %}
+    {% if pagination.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for(request.endpoint, page=pagination.next_num, company=selected_company, date_from=date_from, date_to=date_to, rec_type=rec_type) }}">&rsaquo;</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{{ url_for(request.endpoint, page=pagination.pages, company=selected_company, date_from=date_from, date_to=date_to, rec_type=rec_type) }}">&raquo;</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&rsaquo;</span></li>
+      <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
 {% endblock %}

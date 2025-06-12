@@ -1,5 +1,5 @@
 from myproject import db
-from datetime import date
+from datetime import datetime
 from sqlalchemy.orm import backref
 
 # Reprezentuje portfel gry giełdowej jednego użytkownika.
@@ -17,7 +17,7 @@ class GamePosition(db.Model):
     ticker = db.Column(db.String(10))  # kopia tickera na wypadek usunięcia spółki
     shares = db.Column(db.Integer)
     buy_price = db.Column(db.Float)
-    buy_date = db.Column(db.Date, default=date.today)
+    buy_date = db.Column(db.Date, default=datetime.now)
     closed = db.Column(db.Boolean, default=False)  # czy pozycja zamknięta (np. spółka usunięta)
     company = db.relationship('Company', backref=backref('game_positions', passive_deletes=True))
 
@@ -29,7 +29,7 @@ class GameTransaction(db.Model):
     ticker = db.Column(db.String(10))  # kopia tickera na wypadek usunięcia spółki
     shares = db.Column(db.Integer)
     price = db.Column(db.Float)
-    date = db.Column(db.Date, default=date.today)  # przywrócono typ Date, bez czasu
+    date = db.Column(db.DateTime, default=datetime.now)  # przywrócono typ Date, bez czasu
     type = db.Column(db.String(10))  # 'buy' lub 'sell'
     company = db.relationship('Company', backref=backref('game_transactions', passive_deletes=True))
 
