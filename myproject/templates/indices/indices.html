@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Indeksy - StockCheck{% endblock %}
+{% block content %}
+<h2>Indeksy giełdowe</h2>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Nazwa indeksu</th>
+            <th>Liczba spółek</th>
+            <th>Akcja</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for idx in indices %}
+        <tr>
+            <td>{{ idx.index_name }}</td>
+            <td>{{ idx.companies.count() }}</td>
+            <td><a href="{{ url_for('indices.index_detail', index_id=idx.id) }}" class="btn btn-sm btn-primary">Więcej</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

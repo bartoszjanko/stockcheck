@@ -18,7 +18,9 @@
                 <div class="text-danger">{{ form.company.errors[0] }}</div>
             {% endif %}
         </div>
-        <div style="margin-top:1em;">{{ form.submit(class_='submit-btn') }}</div>
+        <div style="margin-top:1em;">
+            {{ form.submit(class_='btn btn-success') }}
+        </div>
         {% endif %}
         {% for field, errors in form.errors.items() %}
             {% for error in errors %}
@@ -26,5 +28,6 @@
             {% endfor %}
         {% endfor %}
     </form>
-<a href="/companies">Wróć do listy spółek</a>
+    <br>
+<a href="/companies" class="btn btn-secondary mb-3">Wróć do listy spółek</a>
 {% endblock %}

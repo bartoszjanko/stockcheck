@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Spółki w indeksie - StockCheck{% endblock %}
+{% block content %}
+<h2>Spółki w indeksie: {{ index.index_name }}</h2>
+<a href="{{ url_for('indices.indices_list') }}" class="btn btn-secondary mb-3">&larr; Powrót do listy indeksów</a>
+
+{% if chart_data %}
+<div class="mb-4">
+    <h4>Fragment danych historycznych indeksu ({{ ticker }})</h4>
+    <div class="table-responsive">
+        <table class="table table-sm table-bordered">
+            <thead>
+                <tr>
+                    {% for col in chart_data[0].keys() %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in chart_data[:10] %}
+                <tr>
+                    {% for col in chart_data[0].keys() %}
+                        <td>{{ row[col] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Ticker</th>
+            <th>Nazwa spółki</th>
+            <th>Branża</th>
+            <th>Rynek</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in companies %}
+        <tr>
+            <td>{{ c.ticker }}</td>
+            <td>{{ c.name }}</td>
+            <td>{{ c.industry.industry_name if c.industry else '-' }}</td>
+            <td>{{ c.market or '-' }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

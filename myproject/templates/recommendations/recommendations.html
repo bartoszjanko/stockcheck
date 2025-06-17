@@ -33,7 +33,7 @@
     </div>
 </form>
 {% set pagination = pagination if pagination is defined else None %}
-<table class="table">
+<table class="table table-sm table-bordered mb-4">
     <thead>
         <tr>
             <th>Spółka</th>
@@ -48,8 +48,7 @@
         </tr>
     </thead>
     <tbody>
-    {% if pagination %}
-        {% for rec in pagination.items %}
+    {% for rec in recommendations %}
         <tr>
             <td>{{ rec.company.name if rec.company else 'N/A' }}</td>
             <td>{{ rec.company.ticker if rec.company else 'N/A' }}</td>
@@ -76,37 +75,9 @@
             <td>{{ rec.institution }}</td>
             <td>{{ rec.publication_date.strftime('%d-%m-%Y') if rec.publication_date else rec.publication_date }}</td>
         </tr>
-        {% endfor %}
     {% else %}
-        {% for rec in recommendations %}
-        <tr>
-            <td>{{ rec.company.name if rec.company else 'N/A' }}</td>
-            <td>{{ rec.company.ticker if rec.company else 'N/A' }}</td>
-            <td>{{ rec.recommendation_type }}</td>
-            <td>{% set price = current_prices.get(rec.id) %}{{ '{:,.2f}'.format(price).replace(',', ' ') ~ ' zł' if price is not none else '—' }}</td>
-            <td>{{ rec.target_price }}</td>
-            <td>
-                {% set price = current_prices.get(rec.id) %}
-                {% set target_price_str = rec.target_price|string %}
-                {% set target_price_clean = target_price_str.replace('zł', '').replace(' ', '').replace(',', '.') %}
-                {% set target_price = target_price_clean|float %}
-                {% if price is not none and price > 0 and target_price_str and target_price > 0 %}
-                    {% set potential = ((target_price - price) / price * 100) %}
-                    {% if potential >= 0 %}
-                        <span class="fw-bold text-success">{{ '%.2f'|format(potential) }}%</span>
-                    {% else %}
-                        <span class="fw-bold text-danger">{{ '%.2f'|format(potential) }}%</span>
-                    {% endif %}
-                {% else %}
-                    —
-                {% endif %}
-            </td>
-            <td>{{ rec.publication_price }}</td>
-            <td>{{ rec.institution }}</td>
-            <td>{{ rec.publication_date.strftime('%d-%m-%Y') if rec.publication_date else rec.publication_date }}</td>
-        </tr>
-        {% endfor %}
-    {% endif %}
+        <tr><td colspan="9" class="text-center text-muted">Brak rekomendacji</td></tr>
+    {% endfor %}
     </tbody>
 </table>
 {% if pagination %}

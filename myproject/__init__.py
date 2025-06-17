@@ -41,6 +41,7 @@ def create_app():
     from myproject.companies import companies
     from myproject.forum import forum
     from myproject.stock_game import stock_game
+    from myproject.indices import indices
 
     app.register_blueprint(core)
     app.register_blueprint(auth)
@@ -50,6 +51,7 @@ def create_app():
     app.register_blueprint(companies)
     app.register_blueprint(forum)
     app.register_blueprint(stock_game)
+    app.register_blueprint(indices)
 
     return app
 

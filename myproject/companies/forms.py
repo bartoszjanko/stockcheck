@@ -5,7 +5,7 @@ from myproject.companies.models import Company
 
 class AddCompanyForm(FlaskForm):
     company = SelectField('Spółka', coerce=int, validators=[DataRequired()])
-    submit = SubmitField('Dodaj spółkę')
+    submit = SubmitField('Dodaj spółkę', render_kw={'class': 'btn btn-success'})
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Lista spółek - StockCheck{% endblock %}
 {% block content %}
-    <h2>Lista spółek</h2>
+    <h2>Lista obserwowanych spółek</h2>
     <ul>
     {% for c in companies %}
         <li><a href="/companies/{{ c.id }}">{{ c.name }} ({{ c.ticker }})</a></li>

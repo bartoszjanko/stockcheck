@@ -6,13 +6,13 @@
     <p>Notatka:<br>
     <textarea name="note" rows="3" style="width:100%">{{ user_company.note or '' }}</textarea></p>
 
-    <p>Cena kupna:<br>
+    <p>Docelowa cena kupna:<br>
     <input type="number" step="0.01" name="target_buy" value="{{ user_company.target_buy or '' }}" style="width:100%"></p>
 
-    <p>Cena sprzedaży:<br>
+    <p>Docelowa cena sprzedaży:<br>
     <input type="number" step="0.01" name="target_sell" value="{{ user_company.target_sell or '' }}" style="width:100%"></p>
 
-    <p><input type="submit" value="Zapisz"></p>
+    <p><input type="submit" class="btn btn-primary" value="Zapisz"></p>
 </form>
 
     <!-- Szczegóły spółki: rynek, branża, indeksy -->
@@ -126,5 +126,5 @@
         <span style="font-size:0.95em;">Sprawdź czy ticker <b>{{ company.ticker|lower }}</b> jest poprawny na <a href='https://stooq.pl/q/d/?s={{ company.ticker|lower }}' target='_blank'>Stooq</a>.</span></p>
     {% endif %}
 
-    <a href="/companies">Wróć do listy</a>
+    <a href="/companies" class="btn btn-secondary mb-3">Wróć do listy</a>
 {% endblock %}
