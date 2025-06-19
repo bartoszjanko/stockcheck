@@ -1,19 +1,50 @@
 {% extends 'base.html' %}
 {% block title %}Logowanie - StockCheck{% endblock %}
 {% block content %}
-    <h2>Logowanie</h2>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+  <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%; border-radius: 18px;">
+    <h2 class="text-center mb-4">Logowanie</h2>
+    {# Flash messages #}
     {% with messages = get_flashed_messages() %}
       {% if messages %}
-        {% for message in messages %}
-          <div class="form-error" style="color:red;">{{ message }}</div>
-        {% endfor %}
+        <div class="alert alert-danger">
+          <ul class="mb-0">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        </div>
       {% endif %}
     {% endwith %}
-    <form method="post">
-        {{ form.hidden_tag() }}
-        <div>{{ form.email.label }}<br>{{ form.email(size=32) }}</div>
-        <div>{{ form.password.label }}<br>{{ form.password(size=32) }}</div>
-        <div>{{ form.submit(class_='submit-btn') }}</div>
+    {# Form field errors #}
+    {% if form.errors %}
+      <div class="alert alert-danger">
+        <ul class="mb-0">
+        {% for field, errors in form.errors.items() %}
+          {% for error in errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+    <form method="post" autocomplete="off">
+      {{ form.hidden_tag() }}
+      <div class="mb-3">
+        {{ form.email.label(class_="form-label fw-semibold") }}
+        {{ form.email(class_="form-control form-control-lg") }}
+      </div>
+      <div class="mb-3">
+        {{ form.password.label(class_="form-label fw-semibold") }}
+        {{ form.password(class_="form-control form-control-lg") }}
+      </div>
+      <div class="d-grid mb-3">
+        <button type="submit" class="btn btn-primary btn-lg">Zaloguj się</button>
+      </div>
     </form>
-    <a href="/register">Nie masz konta? Zarejestruj się</a>
+    <div class="text-center mt-2">
+      <a href="{{ url_for('auth.register') }}" class="link-primary">Nie masz konta? Zarejestruj się</a>
+    </div>
+  </div>
+</div>
 {% endblock %}

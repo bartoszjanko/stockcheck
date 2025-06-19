@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Sprzedaj akcje</h2>
+{% if sale_success %}
+<div class="alert alert-success">Akcje zostały sprzedane!</div>
+{% endif %}
 <form method="post">
     <div class="form-group">
         <label for="ticker">Spółka:</label>

@@ -1,35 +1,141 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Twój portfel gry giełdowej</h2>
-<p>Gotówka: {{ '%.2f' % portfolio.cash }} zł</p>
-<p>Wartość portfela (z akcjami): {{ '%.2f' % total }} zł</p>
+
+<div class="row mb-4">
+  <div class="col-md-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title text-center mb-4">Podsumowanie portfela</h5>
+        <div class="text-center">
+          <div class="mb-3 p-3 bg-light rounded">
+            <small class="text-muted d-block">Gotówka</small>
+            <h4 class="fw-bold text-success mb-0">{{ '%.2f' % portfolio.cash }} zł</h4>
+          </div>
+          <div class="p-3 bg-primary bg-opacity-10 rounded">
+            <small class="text-muted d-block">Całkowita wartość</small>
+            <h4 class="fw-bold text-primary mb-0">{{ '%.2f' % total }} zł</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card h-100">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title text-center mb-3">Struktura portfela</h5>
+        <div class="flex-grow-1 d-flex align-items-center justify-content-center">
+          <div id="pie-chart" style="width: 100%; height: 600px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+<script>
+var pieLabels = {{ pie_labels|tojson|safe }};
+var pieValues = {{ pie_values|tojson|safe }};
+  
+  // Funkcja generująca kolory dla dowolnej liczby segmentów
+  function generateColors(count) {
+    var baseColors = [
+      '#6B73FF', '#9B59B6', '#3498DB', '#1ABC9C', '#F39C12',
+      '#E74C3C', '#95A5A6', '#34495E', '#16A085', '#2980B9'
+    ];
+    
+    var colors = [];
+    for (var i = 0; i < count; i++) {
+      if (i < baseColors.length) {
+        colors.push(baseColors[i]);
+      } else {
+        // Generuj kolory HSL dla dodatkowych segmentów
+        var hue = (i * 137.5) % 360; // Golden angle dla równomiernego rozkładu
+        var saturation = 65 + (i % 3) * 10; // 65-85%
+        var lightness = 45 + (i % 4) * 10; // 45-75%
+        colors.push('hsl(' + hue + ', ' + saturation + '%, ' + lightness + '%)');
+      }
+    }
+    return colors;
+  }
+  
+  if (pieLabels.length > 0 && pieValues.length > 0) {
+    var data = [{
+      values: pieValues,
+      labels: pieLabels,
+      type: 'pie',
+      textinfo: 'percent',
+      textposition: 'auto',
+      textfont: {
+        size: 14,
+        color: '#ffffff',
+        family: 'Inter, -apple-system, sans-serif'
+      },
+      hoverinfo: 'label+value+percent',
+      hovertemplate: '<b>%{label}</b><br>Udział: <b>%{percent}</b><br>Wartość: <b>%{value:.2f} zł</b><extra></extra>',
+      marker: {
+        line: {color: '#ffffff', width: 3},
+        colors: generateColors(pieLabels.length)
+      },
+      pull: 0.02,
+      hole: 0.4
+    }];
+    var layout = {
+      margin: {t: 20, b: 60, l: 20, r: 20},
+      showlegend: true,
+      legend: {
+        orientation: 'h',
+        x: 0.5,
+        y: -0.1,
+        xanchor: 'center',
+        yanchor: 'top',
+        font: {size: 12, family: 'Inter, -apple-system, sans-serif', color: '#374151'},
+        itemwidth: 30
+      },
+      paper_bgcolor: 'transparent',
+      plot_bgcolor: 'transparent',
+      font: {family: 'Inter, -apple-system, sans-serif', size: 13, color: '#374151'},
+      annotations: [{
+        text: '<b>Portfolio</b>',
+        x: 0.5, y: 0.5,
+        font: {size: 16, color: '#6b7280', family: 'Inter, -apple-system, sans-serif'},
+        showarrow: false
+      }]
+    };
+    Plotly.newPlot('pie-chart', data, layout, {
+      responsive: true, 
+      displayModeBar: false,
+      staticPlot: false
+    });
+  } else {
+    document.getElementById('pie-chart').innerHTML = '<div style="color:#9ca3af;font-size:16px;text-align:center;padding:100px 20px;font-family:Inter,-apple-system,sans-serif;"><i class="fas fa-chart-pie" style="font-size:48px;color:#e5e7eb;margin-bottom:16px;"></i><br>Brak pozycji w portfelu<br><small style="color:#d1d5db;">Kup pierwsze akcje, aby zobaczyć wykres</small></div>';
+  }
+</script>
+<h4>Twoje pozycje</h4>
 <table class="table table-sm table-bordered mb-4">
-    <thead>
-        <tr>
-            <th>Ticker</th>
-            <th>Nazwa spółki</th>
-            <th>Ilość</th>
-            <th>Cena zakupu</th>
-            <th>Aktualna cena</th>
-            <th>Wartość pozycji</th>
-            <th>Zysk/Strata (%)</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for pos in portfolio.positions %}
-        <tr>
-            <td>{{ pos.ticker }}</td>
-            <td>{{ names[pos.ticker] if pos.ticker in names else '' }}</td>
-            <td>{{ pos.shares }}</td>
-            <td>{{ '%.2f' % pos.buy_price }}</td>
-            <td>{{ '%.2f' % prices[pos.ticker] }}</td>
-            <td>{{ '%.2f' % pos.value }}</td>
-            <td class="{% if pos.profit_percent >= 0 %}text-success{% else %}text-danger{% endif %}">
-                {{ '%.2f' % pos.profit_percent }}%
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+  <thead>
+    <tr>
+      <th>Spółka</th>
+      <th>Ticker</th>
+      <th>Ilość</th>
+      <th>Śr. cena zakupu</th>
+      <th>Aktualna cena</th>
+      <th>Wartość</th>
+      <th>Zysk/Strata</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for pos in portfolio.positions %}
+    <tr>
+      <td>{{ names[pos.ticker] if pos.ticker in names else '' }}</td>
+      <td>{{ pos.ticker }}</span></td>
+      <td>{{ pos.shares }}</td>
+      <td>{{ '-' if avg_buy_prices[pos.ticker] is none else '%.2f' % avg_buy_prices[pos.ticker] }}</td>
+      <td>{{ '-' if prices[pos.ticker] is none else '%.2f' % prices[pos.ticker] }}</td>
+      <td>{{ '%.2f' % pos.value }}</td>
+      <td><span class="fw-bold {% if pos.profit_percent >= 0 %}text-success{% else %}text-danger{% endif %}">{{ '%.2f' % pos.profit_percent }}%</span></td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 <a href="{{ url_for('stock_game.buy') }}" class="btn btn-success">Kup akcje</a>
 <a href="{{ url_for('stock_game.sell') }}" class="btn btn-danger">Sprzedaj akcje</a>

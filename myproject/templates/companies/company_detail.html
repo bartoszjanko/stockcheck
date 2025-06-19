@@ -103,26 +103,25 @@
         <p style="color: #888;">Brak rekomendacji dla tej spółki.</p>
     {% endif %}
 
-    <h3>Dane dzienne (Stooq)</h3>
-    <div style="font-size:0.95em; color:#888; margin-bottom:0.5em;">
-        <span>Źródło: <a href="https://stooq.pl/q/d/?s={{ company.ticker|lower }}" target="_blank">Stooq: {{ company.ticker|lower }}</a></span>
+    <h3>Wykres</h3>
+    <div class="mb-2">
+      {% set range_options = [
+        ('1m', '1M'), ('6m', '6M'), ('ytd', 'YTD'), ('1r', '1R'), ('5l', '5L'), ('max', 'MAX')
+      ] %}
+      {% set selected_range = request.args.get('range', '6m').lower() %}
+      {% for val, label in range_options %}
+        <a href="{{ url_for('companies.company_detail', company_id=company.id, range=val) }}"
+           class="btn btn-sm {% if selected_range == val %}btn-primary{% else %}btn-outline-primary{% endif %} mx-1 my-1">{{ label }}</a>
+      {% endfor %}
     </div>
-    {% if stooq_daily %}
-        <table class="table table-sm table-bordered" style="font-size:0.95em; min-width: 400px;">
-            <tr>
-                <th>Data</th><th>Open</th><th>High</th><th>Low</th><th>Close</th><th>Volume</th>
-            </tr>
-            <tr>
-                <td>{{ stooq_daily.date }}</td>
-                <td>{{ stooq_daily.open }}</td>
-                <td>{{ stooq_daily.high }}</td>
-                <td>{{ stooq_daily.low }}</td>
-                <td>{{ stooq_daily.close }}</td>
-                <td>{{ stooq_daily.vol }}</td>
-            </tr>
-        </table>
+    {% if candlestick_chart %}
+    <div class="card mb-4 mt-3">
+      <div class="card-body">
+        {{ candlestick_chart|safe }}
+      </div>
+    </div>
     {% else %}
-        <p style="color: #888;">Brak danych dziennych ze Stooq.<br>
+        <p style="color: #888;">Brak danych do wykresu ze Stooq.<br>
         <span style="font-size:0.95em;">Sprawdź czy ticker <b>{{ company.ticker|lower }}</b> jest poprawny na <a href='https://stooq.pl/q/d/?s={{ company.ticker|lower }}' target='_blank'>Stooq</a>.</span></p>
     {% endif %}
 

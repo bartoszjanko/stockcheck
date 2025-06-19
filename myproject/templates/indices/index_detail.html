@@ -1,35 +1,29 @@
 {% extends 'base.html' %}
 {% block title %}Spółki w indeksie - StockCheck{% endblock %}
 {% block content %}
-<h2>Spółki w indeksie: {{ index.index_name }}</h2>
+<h2>Indeks {{ index.index_name }}</h2>
 <a href="{{ url_for('indices.indices_list') }}" class="btn btn-secondary mb-3">&larr; Powrót do listy indeksów</a>
 
-{% if chart_data %}
+{% if index_chart %}
 <div class="mb-4">
-    <h4>Fragment danych historycznych indeksu ({{ ticker }})</h4>
-    <div class="table-responsive">
-        <table class="table table-sm table-bordered">
-            <thead>
-                <tr>
-                    {% for col in chart_data[0].keys() %}
-                        <th>{{ col }}</th>
-                    {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in chart_data[:10] %}
-                <tr>
-                    {% for col in chart_data[0].keys() %}
-                        <td>{{ row[col] }}</td>
-                    {% endfor %}
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+  <div class="mb-2">
+    {% set range_options = [
+      ('1m', '1M'), ('6m', '6M'), ('ytd', 'YTD'), ('1r', '1R'), ('5l', '5L'), ('max', 'MAX')
+    ] %}
+    {% set selected_range = request.args.get('range', '6m').lower() %}
+    {% for val, label in range_options %}
+      <a href="{{ url_for('indices.index_detail', index_id=index.id, range=val) }}"
+         class="btn btn-sm {% if selected_range == val %}btn-primary{% else %}btn-outline-primary{% endif %} mx-1 my-1">{{ label }}</a>
+    {% endfor %}
+  </div>
+  <div class="card mb-4 mt-3">
+    <div class="card-body">
+      {{ index_chart|safe }}
     </div>
+  </div>
 </div>
 {% endif %}
-
+<h3>Spółki w indeksie</h3>
 <table class="table table-bordered table-hover">
     <thead>
         <tr>

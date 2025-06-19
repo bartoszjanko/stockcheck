@@ -6,7 +6,6 @@ from myproject.auth.models import User
 
 from . import auth
 
-
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -14,17 +13,12 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.check_password(form.password.data):
             login_user(user)
-            flash('Logged in successfully!')
             next_page = request.args.get('next')
             if not next_page or not next_page.startswith('/'):
                 next_page = url_for('companies.list_companies')
             return redirect(next_page)
         else:
             flash('Nieprawidłowy login lub hasło!')
-    # Show all form errors (e.g. missing fields)
-    for field, errors in form.errors.items():
-        for error in errors:
-            flash(error)
     return render_template('auth/login.html', form=form)
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -36,11 +30,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         # Redirect to login
-        return redirect(url_for('core.login'))
-    # Show all form errors (including password mismatch, duplicate email/username)
-    for field, errors in form.errors.items():
-        for error in errors:
-            flash(error)
+        return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)
 
 @auth.route('/logout')

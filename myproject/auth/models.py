@@ -10,6 +10,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     role = db.Column(db.String(20), default="user")  # "user" lub "admin"
     companies = db.relationship('UserCompany', backref='owner', lazy=True)
+    portfolio = db.relationship('GamePortfolio', backref='user', uselist=False)
 
     def __init__(self, email, username, password, role="user"):
         self.email = email

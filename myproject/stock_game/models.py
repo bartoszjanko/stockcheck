@@ -29,7 +29,7 @@ class GameTransaction(db.Model):
     ticker = db.Column(db.String(10))  # kopia tickera na wypadek usunięcia spółki
     shares = db.Column(db.Integer)
     price = db.Column(db.Float)
-    date = db.Column(db.DateTime, default=datetime.now)  # przywrócono typ Date, bez czasu
+    date = db.Column(db.DateTime, default=datetime.now) 
     type = db.Column(db.String(10))  # 'buy' lub 'sell'
     company = db.relationship('Company', backref=backref('game_transactions', passive_deletes=True))
 

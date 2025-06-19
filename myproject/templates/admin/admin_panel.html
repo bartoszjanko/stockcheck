@@ -2,26 +2,79 @@
 {% block content %}
 <h2>Panel administratora</h2>
 <hr>
-<h4>Statystyki spółek wg rynku</h4>
-<ul>
-  {% for market, count in market_stats %}
-    <li><b>{{ market or 'Brak danych' }}</b>: {{ count }}</li>
-  {% endfor %}
-</ul>
-
-<h4>Statystyki spółek wg branży</h4>
-<ul>
-  {% for industry_id, count in industry_stats %}
-    <li><b>{{ industries[industry_id] if industry_id in industries else 'Brak danych' }}</b>: {{ count }}</li>
-  {% endfor %}
-</ul>
-
-<p><b>Liczba raportów:</b> {{ reports_count }}</p>
-<p><b>Liczba rekomendacji:</b> {{ recommendations_count }}</p>
+<div class="row mb-4">
+  <div class="col-md-6">
+    <h4>Statystyki spółek wg rynku</h4>
+    <table class="table table-sm table-bordered align-middle">
+      <thead class="table-light">
+        <tr><th>Rynek</th><th>Liczba spółek</th></tr>
+      </thead>
+      <tbody>
+        {% for market, count in market_stats %}
+        <tr>
+          <td><b>{{ market or 'Brak danych' }}</b></td>
+          <td>{{ count }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <!-- Prosta tabela pod statystykami rynku -->
+    <table class="table table-bordered table-sm mt-3">
+      <thead class="table-light">
+        <tr>
+          <th>Liczba raportów</th>
+          <th>Liczba rekomendacji</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ reports_count }}</td>
+          <td>{{ recommendations_count }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-6">
+    <h4>Statystyki spółek wg branży</h4>
+    <div class="row">
+      <div class="col-6">
+        <table class="table table-sm table-bordered align-middle">
+          <thead class="table-light">
+            <tr><th>Branża</th><th>Liczba</th></tr>
+          </thead>
+          <tbody>
+            {% for industry_id, count in industry_stats[:industry_stats|length//2 + industry_stats|length%2] %}
+            <tr>
+              <td><b>{{ industries[industry_id] if industry_id in industries else 'Brak danych' }}</b></td>
+              <td>{{ count }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="col-6">
+        <table class="table table-sm table-bordered align-middle">
+          <thead class="table-light">
+            <tr><th>Branża</th><th>Liczba</th></tr>
+          </thead>
+          <tbody>
+            {% for industry_id, count in industry_stats[industry_stats|length//2 + industry_stats|length%2:] %}
+            <tr>
+              <td><b>{{ industries[industry_id] if industry_id in industries else 'Brak danych' }}</b></td>
+              <td>{{ count }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Usunięto duże karty z liczbą raportów i rekomendacji -->
 <hr>
 <h4>Najaktywniejsi użytkownicy (po liczbie postów)</h4>
-<table class="table table-sm table-bordered">
-  <thead>
+<table class="table table-sm table-bordered align-middle">
+  <thead class="table-light">
     <tr><th>Email</th><th>Nazwa użytkownika</th><th>Rola</th><th>Liczba postów</th></tr>
   </thead>
   <tbody>
@@ -35,11 +88,10 @@
     {% endfor %}
   </tbody>
 </table>
-
 <hr>
 <h4>Użytkownicy</h4>
-<table class="table table-sm table-bordered">
-  <thead>
+<table class="table table-sm table-bordered align-middle">
+  <thead class="table-light">
     <tr>
       <th>ID</th>
       <th>Email</th>

@@ -1,23 +1,38 @@
 {% extends 'base.html' %}
 {% block title %}Indeksy - StockCheck{% endblock %}
 {% block content %}
-<h2>Indeksy giełdowe</h2>
-<table class="table table-bordered table-hover">
-    <thead>
-        <tr>
-            <th>Nazwa indeksu</th>
-            <th>Liczba spółek</th>
-            <th>Akcja</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for idx in indices %}
-        <tr>
-            <td>{{ idx.index_name }}</td>
-            <td>{{ idx.companies.count() }}</td>
-            <td><a href="{{ url_for('indices.index_detail', index_id=idx.id) }}" class="btn btn-sm btn-primary">Więcej</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+    <h2 class="mb-0">Indeksy giełdowe</h2>
+</div>
+<div class="row g-3">
+  {% for idx in indices %}
+    {% if idx.index_name and idx.index_name|lower != 'nan' %}
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card shadow-sm h-100 border-0">
+        <div class="card-body d-flex flex-column justify-content-between">
+          <div class="d-flex align-items-center mb-2">
+            <span class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width:38px;height:38px;font-size:1.3em;">
+              <i class="fas fa-chart-line"></i>
+            </span>
+            <div>
+              <h5 class="card-title mb-0">{{ idx.index_name }}</h5>
+              <div class="text-muted small mt-1">Liczba spółek: <span class="badge bg-secondary">{{ idx.companies.count() if idx.companies and idx.companies.count() is not none else 0 }}</span></div>
+            </div>
+          </div>
+          <div class="mt-3">
+            <a href="{{ url_for('indices.index_detail', index_id=idx.id) }}" class="btn btn-outline-info w-100">
+              <i class="fas fa-arrow-right"></i> Szczegóły
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+  {% if indices|selectattr('index_name', 'lower')|select('ne', 'nan')|list|length == 0 %}
+  <div class="col-12">
+    <div class="alert alert-secondary text-center">Brak indeksów.</div>
+  </div>
+  {% endif %}
+</div>
 {% endblock %}

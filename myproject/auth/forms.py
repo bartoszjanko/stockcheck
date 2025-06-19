@@ -4,16 +4,16 @@ from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 from myproject.auth.models import User
 
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email(message='Podaj poprawny adres email!')])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Log in')
+    email = StringField('Adres e-mail', validators=[DataRequired(), Email(message='Podaj poprawny adres email!')])
+    password = PasswordField('Hasło', validators=[DataRequired()])
+    submit = SubmitField('Zaloguj się')
 
 class RegistrationForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email(message='Podaj poprawny adres email!')])
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    pass_confirm = PasswordField('Confirm Password', validators=[DataRequired()])
-    submit = SubmitField('Register')
+    email = StringField('Adres e-mail', validators=[DataRequired(), Email(message='Podaj poprawny adres email!')])
+    username = StringField('Nazwa użytkownika', validators=[DataRequired()])
+    password = PasswordField('Hasło', validators=[DataRequired()])
+    pass_confirm = PasswordField('Powtórz hasło', validators=[DataRequired()])
+    submit = SubmitField('Zarejestruj się')
 
     def validate(self, extra_validators=None):
         initial = super().validate(extra_validators)

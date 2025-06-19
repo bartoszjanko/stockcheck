@@ -1,20 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Kup akcje</h2>
+<div class="mb-3">
+    <div class="alert alert-info mb-2 p-2">
+        <b>Wolne środki:</b> {{ '%.2f' % cash }} zł<br>
+        <b>Całkowita wartość portfela:</b> {{ '%.2f' % total }} zł
+    </div>
+</div>
 <form method="post">
     <div class="form-group">
         <label for="ticker">Spółka:</label>
         <select name="ticker" id="ticker" class="form-control" required>
             {% for ticker in tickers %}
-            <option value="{{ ticker }}">{{ ticker }} - {{ names[ticker] }}</option>
+            <option value="{{ ticker }}" {% if calc_ticker == ticker %}selected{% endif %}>{{ ticker }} - {{ names[ticker] }}</option>
             {% endfor %}
         </select>
     </div>
     <div class="form-group">
         <label for="shares">Ilość akcji:</label>
-        <input type="number" name="shares" id="shares" class="form-control" required>
+        <input type="number" name="shares" id="shares" class="form-control" value="{{ calc_shares if calc_shares is not none else '' }}" required>
     </div>
-    <button type="submit" class="btn btn-success">Kup</button>
-    <a href="{{ url_for('stock_game.portfolio') }}" class="btn btn-secondary">Powrót</a>
+    <div class="mb-3">
+        <button type="submit" name="action" value="calc" class="btn btn-outline-primary">Przelicz</button>
+        <button type="submit" name="action" value="buy" class="btn btn-success">Kup</button>
+        <a href="{{ url_for('stock_game.portfolio') }}" class="btn btn-secondary">Powrót</a>
+    </div>
+    {% if calc_cost is not none %}
+    <div class="alert alert-secondary mt-3">
+        <b>Cena za 1 akcję:</b> {{ '%.2f' % calc_price if calc_price is not none else '-' }} zł<br>
+        <b>Wartość transakcji:</b> {{ '%.2f' % calc_cost if calc_cost is not none else '-' }} zł
+    </div>
+    {% endif %}
 </form>
 {% endblock %}
