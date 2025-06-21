@@ -4,10 +4,13 @@
 {% if sale_success %}
 <div class="alert alert-success">Akcje zostały sprzedane!</div>
 {% endif %}
+{% if not market_open %}
+<div class="alert alert-warning mt-3">Rynek jest zamknięty. Sprzedaż możliwa tylko w godzinach 9:00-17:00 (poniedziałek-piątek).</div>
+{% endif %}
 <form method="post">
     <div class="form-group">
         <label for="ticker">Spółka:</label>
-        <select name="ticker" id="ticker" class="form-control" required>
+        <select name="ticker" id="ticker" class="form-control" required {% if not market_open %}disabled{% endif %}>
             {% for ticker in tickers %}
             <option value="{{ ticker }}">{{ ticker }} - {{ names[ticker] if ticker in names else '' }}</option>
             {% endfor %}
@@ -15,9 +18,9 @@
     </div>
     <div class="form-group">
         <label for="shares">Ilość akcji do sprzedaży:</label>
-        <input type="number" name="shares" id="shares" class="form-control" required>
+        <input type="number" name="shares" id="shares" class="form-control" required {% if not market_open %}disabled{% endif %}>
     </div>
-    <button type="submit" class="btn btn-danger">Sprzedaj</button>
+    <button type="submit" class="btn btn-danger" {% if not market_open %}disabled{% endif %}>Sprzedaj</button>
     <a href="{{ url_for('stock_game.portfolio') }}" class="btn btn-secondary">Powrót</a>
 </form>
 {% endblock %}

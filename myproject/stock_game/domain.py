@@ -9,18 +9,19 @@ To czysta logika biznesowa, zgodna z zasadami programowania obiektowego.
 
 # Reprezentuje pojedynczą inwestycję w akcje danej spółki.
 class Position:
-    def __init__(self, ticker, shares, buy_price, buy_date, value=None, profit_percent=None):
+    def __init__(self, ticker, shares, buy_price, buy_date, value=None, profit_pct=None):
         self.ticker = ticker
         self.shares = shares
         self.buy_price = buy_price
         self.buy_date = buy_date
         self.value = value
-        self.profit_percent = profit_percent
+        self.profit_percent = profit_pct  # Przechowuje obliczoną wartość procentowego zysku
 
     def current_value(self, current_price):
         return self.shares * current_price
 
-    def profit_percent(self, current_price):
+    def calculate_profit_percent(self, current_price):
+        """Oblicza procentowy zysk na podstawie aktualnej ceny"""
         if self.buy_price == 0:
             return 0
         return ((current_price - self.buy_price) / self.buy_price) * 100

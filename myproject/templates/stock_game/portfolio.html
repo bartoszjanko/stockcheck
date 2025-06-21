@@ -16,6 +16,15 @@
             <small class="text-muted d-block">Całkowita wartość</small>
             <h4 class="fw-bold text-primary mb-0">{{ '%.2f' % total }} zł</h4>
           </div>
+          <div class="p-3 rounded mb-3" style="background-color: #f8f9fa;">
+            <small class="text-muted d-block">Łączny zysk/strata</small>
+            <h4 class="fw-bold mb-0">
+              <span class="{% if total_profit >= 0 %}text-success{% else %}text-danger{% endif %}">
+                {{ '%.2f' % total_profit }} zł
+                <small>({{ '%.2f' % total_profit_percent }}%)</small>
+              </span>
+            </h4>
+          </div>
         </div>
       </div>
     </div>

@@ -1,56 +1,134 @@
 {% extends 'base.html' %}
-{% block title %}StockCheck{% endblock %}
+{% block title %}StockCheck - Twoja wirtualna giełda i społeczność inwestorów{% endblock %}
 
 {% block content %}
-<div class="simple-container">
-    <h1>Witaj w StockCheck</h1>
-    <div class="auth-buttons">
-        <a href="/login" class="auth-btn">Zaloguj się</a>
-        <a href="/register" class="auth-btn secondary">Zarejestruj się</a>
+<div class="landing-hero">
+    <h1>StockCheck</h1>
+    <p class="lead">Kompleksowa platforma do nauki inwestowania, analizy spółek i wymiany doświadczeń na forum.</p>
+    <div class="hero-buttons">
+        <a href="/register" class="btn btn-primary btn-lg">Załóż konto</a>
+        <a href="/login" class="btn btn-outline-primary btn-lg">Zaloguj się</a>
     </div>
 </div>
 
+<div class="features-section">
+    <div class="feature">
+        <i class="fas fa-chart-line fa-2x"></i>
+        <h3>Gra giełdowa</h3>
+        <p>Inwestuj wirtualne środki w akcje spółek notowanych na GPW i NewConnect. Rywalizuj w rankingu, analizuj wyniki i ucz się inwestowania bez ryzyka.</p>
+    </div>
+    <div class="feature">
+        <i class="fas fa-comments fa-2x"></i>
+        <h3>Forum inwestorów</h3>
+        <p>Dziel się opiniami, zadawaj pytania i komentuj wydarzenia rynkowe. Każda spółka ma własną tablicę dyskusyjną.</p>
+    </div>
+    <div class="feature">
+        <i class="fas fa-search-dollar fa-2x"></i>
+        <h3>Analiza spółek</h3>
+        <p>Przeglądaj profile spółek, analizuj notowania, rekomendacje i kalendarz raportów finansowych. Podejmuj decyzje na podstawie rzetelnych danych.</p>
+    </div>
+</div>
+
+<div class="about-section">
+    <h2>Dlaczego StockCheck?</h2>
+    <ul>
+        <li>Realistyczna symulacja rynku z aktualnymi danymi giełdowymi</li>
+        <li>Bezpieczne środowisko do nauki inwestowania</li>
+        <li>Aktywna społeczność i wsparcie doświadczonych inwestorów</li>
+        <li>Przejrzysty ranking i historia transakcji</li>
+        <li>Nowoczesny, responsywny interfejs</li>
+    </ul>
+</div>
+
 <style>
-    .simple-container {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 2rem;
-        text-align: center;
-    }
-    
-    h1 {
-        font-size: 2rem;
-        margin-bottom: 2rem;
-        color: #333;
-    }
-    
-    .auth-buttons {
-        display: flex;
+.landing-hero {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 3rem 1rem 2rem 1rem;
+    text-align: center;
+}
+.landing-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1a237e;
+    margin-bottom: 0.5rem;
+}
+.landing-hero .lead {
+    font-size: 1.3rem;
+    color: #374151;
+    margin-bottom: 2rem;
+}
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+.features-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0 3rem 0;
+}
+.feature {
+    background: #f5f7fa;
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    max-width: 320px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(60,72,88,0.07);
+}
+.feature i {
+    color: #1976d2;
+    margin-bottom: 0.7rem;
+}
+.feature h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #1a237e;
+}
+.feature p {
+    color: #374151;
+    font-size: 1rem;
+}
+.about-section {
+    max-width: 700px;
+    margin: 0 auto 2rem auto;
+    background: #e3eafc;
+    border-radius: 10px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+}
+.about-section h2 {
+    color: #1a237e;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+.about-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 400px;
+}
+.about-section li {
+    font-size: 1.05rem;
+    color: #374151;
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.2em;
+}
+.about-section li:before {
+    content: '\2714';
+    color: #1976d2;
+    position: absolute;
+    left: 0;
+}
+@media (max-width: 900px) {
+    .features-section {
         flex-direction: column;
-        gap: 1rem;
+        align-items: center;
     }
-    
-    .auth-btn {
-        display: block;
-        padding: 0.8rem;
-        border-radius: 4px;
-        text-decoration: none;
-        font-size: 1.1rem;
-    }
-    
-    .auth-btn {
-        background: #007bff;
-        color: white;
-    }
-    
-    .auth-btn.secondary {
-        background: none;
-        color: #007bff;
-        border: 1px solid #007bff;
-    }
-    
-    .auth-btn:hover {
-        opacity: 0.9;
-    }
+}
 </style>
 {% endblock %}

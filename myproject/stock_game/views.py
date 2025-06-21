@@ -18,6 +18,8 @@ from .services import (
     close_deleted_company_positions,
     get_transactions,
     get_ranking_list,
+    calculate_portfolio_profit,  # dodaj do importów
+    is_market_open,
 )
 from myproject import db
 from datetime import datetime
@@ -46,7 +48,11 @@ def buy():
     calc_shares = None
     calc_price = None
     calc_cost = None
+    market_open = is_market_open()
     if request.method == 'POST':
+        if not market_open:
+            flash('Rynek jest zamknięty. Kupno możliwe tylko w godzinach 9:00-17:00 (pon-pt).')
+            return redirect(url_for('stock_game.buy'))
         ticker = request.form.get('ticker')
         shares = request.form.get('shares')
         action = request.form.get('action')
@@ -66,9 +72,13 @@ def buy():
             if not valid:
                 flash(msg)
                 return redirect(url_for('stock_game.buy'))
-            execute_buy(db_portfolio, ticker, shares, price, company)
-            flash('Zakupiono akcje!')
-            return redirect(url_for('stock_game.portfolio'))
+            success, msg = execute_buy(db_portfolio, ticker, shares, price, company)
+            if success:
+                flash('Zakupiono akcje!')
+                return redirect(url_for('stock_game.portfolio'))
+            else:
+                flash(msg)
+                return redirect(url_for('stock_game.buy'))
     return render_template(
         'stock_game/buy.html',
         tickers=tickers,
@@ -78,7 +88,8 @@ def buy():
         calc_ticker=calc_ticker,
         calc_shares=calc_shares,
         calc_price=calc_price,
-        calc_cost=calc_cost
+        calc_cost=calc_cost,
+        market_open=market_open
     )
 
 @stock_game.route('/sell', methods=['GET', 'POST'])
@@ -90,7 +101,11 @@ def sell():
     tickers = [c.ticker for c in companies]
     names = {c.ticker: c.name for c in companies}
     sale_success = False
+    market_open = is_market_open()
     if request.method == 'POST':
+        if not market_open:
+            flash('Rynek jest zamknięty. Sprzedaż możliwa tylko w godzinach 9:00-17:00 (pon-pt).')
+            return redirect(url_for('stock_game.sell'))
         ticker = request.form.get('ticker')
         shares = int(request.form.get('shares'))
         price = get_latest_price(ticker)
@@ -102,13 +117,16 @@ def sell():
         if not valid:
             flash(msg)
             return redirect(url_for('stock_game.sell'))
-        execute_sell(db_portfolio, ticker, shares, price, position)
+        success, msg = execute_sell(db_portfolio, ticker, shares, price, position)
+        if not success:
+            flash(msg)
+            return redirect(url_for('stock_game.sell'))
         sale_success = True
         db_positions = GamePosition.query.filter_by(portfolio_id=db_portfolio.id).all()
         companies = Company.query.filter(Company.ticker.in_([p.ticker for p in db_positions])).all()
         tickers = [c.ticker for c in companies]
         names = {c.ticker: c.name for c in companies}
-    return render_template('stock_game/sell.html', tickers=tickers, names=names, sale_success=sale_success)
+    return render_template('stock_game/sell.html', tickers=tickers, names=names, sale_success=sale_success, market_open=market_open)
 
 @stock_game.route('/portfolio')
 @login_required
@@ -129,11 +147,14 @@ def portfolio():
     pie_labels = []
     pie_values = []
     for pos in positions:
-        if pos['value'] > 0:
-            pie_labels.append(names.get(pos['ticker'], pos['ticker']))
-            pie_values.append(pos['value'])
-    total = db_portfolio.cash + sum(pos['value'] for pos in positions)
+        if pos.value > 0:
+            pie_labels.append(names.get(pos.ticker, pos.ticker))
+            pie_values.append(pos.value)
+    total = db_portfolio.cash + sum(pos.value for pos in positions)
     portfolio = Portfolio(db_portfolio.cash, positions)
+
+    # Oblicz łączny zysk/stratę portfela przez services.py
+    total_profit, total_profit_percent = calculate_portfolio_profit(positions, avg_buy_prices)
     return render_template(
         'stock_game/portfolio.html',
         portfolio=portfolio,
@@ -142,7 +163,9 @@ def portfolio():
         names=names,
         pie_labels=pie_labels,
         pie_values=pie_values,
-        avg_buy_prices=avg_buy_prices
+        avg_buy_prices=avg_buy_prices,
+        total_profit=total_profit,
+        total_profit_percent=total_profit_percent
     )
 
 @stock_game.route('/history')

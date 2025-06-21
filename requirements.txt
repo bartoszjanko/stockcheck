@@ -3,3 +3,8 @@ Flask-SQLAlchemy
 Flask-Login
 Werkzeug
 Flask-Bcrypt
+pytz
+pandas
+requests
+plotly
+numpy

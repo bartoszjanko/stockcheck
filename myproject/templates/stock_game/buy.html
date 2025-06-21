@@ -7,10 +7,13 @@
         <b>Całkowita wartość portfela:</b> {{ '%.2f' % total }} zł
     </div>
 </div>
+{% if not market_open %}
+<div class="alert alert-warning mt-3">Rynek jest zamknięty. Kupno możliwe tylko w godzinach 9:00-17:00 (poniedziałek-piątek).</div>
+{% endif %}
 <form method="post">
     <div class="form-group">
         <label for="ticker">Spółka:</label>
-        <select name="ticker" id="ticker" class="form-control" required>
+        <select name="ticker" id="ticker" class="form-control" required {% if not market_open %}disabled{% endif %}>
             {% for ticker in tickers %}
             <option value="{{ ticker }}" {% if calc_ticker == ticker %}selected{% endif %}>{{ ticker }} - {{ names[ticker] }}</option>
             {% endfor %}
@@ -18,11 +21,11 @@
     </div>
     <div class="form-group">
         <label for="shares">Ilość akcji:</label>
-        <input type="number" name="shares" id="shares" class="form-control" value="{{ calc_shares if calc_shares is not none else '' }}" required>
+        <input type="number" name="shares" id="shares" class="form-control" value="{{ calc_shares if calc_shares is not none else '' }}" required {% if not market_open %}disabled{% endif %}>
     </div>
     <div class="mb-3">
-        <button type="submit" name="action" value="calc" class="btn btn-outline-primary">Przelicz</button>
-        <button type="submit" name="action" value="buy" class="btn btn-success">Kup</button>
+        <button type="submit" name="action" value="calc" class="btn btn-outline-primary" {% if not market_open %}disabled{% endif %}>Przelicz</button>
+        <button type="submit" name="action" value="buy" class="btn btn-success" {% if not market_open %}disabled{% endif %}>Kup</button>
         <a href="{{ url_for('stock_game.portfolio') }}" class="btn btn-secondary">Powrót</a>
     </div>
     {% if calc_cost is not none %}
