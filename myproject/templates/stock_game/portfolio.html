@@ -141,7 +141,11 @@ var pieValues = {{ pie_values|tojson|safe }};
       <td>{{ '-' if avg_buy_prices[pos.ticker] is none else '%.2f' % avg_buy_prices[pos.ticker] }}</td>
       <td>{{ '-' if prices[pos.ticker] is none else '%.2f' % prices[pos.ticker] }}</td>
       <td>{{ '%.2f' % pos.value }}</td>
-      <td><span class="fw-bold {% if pos.profit_percent >= 0 %}text-success{% else %}text-danger{% endif %}">{{ '%.2f' % pos.profit_percent }}%</span></td>
+      <td>
+        <span class="fw-bold {% if pos.profit_percent >= 0 %}text-success{% else %}text-danger{% endif %}">
+          {{ '%.2f' % pos.profit_value }} zł ({{ '%.2f' % pos.profit_percent }}%)
+        </span>
+      </td>
     </tr>
     {% endfor %}
   </tbody>

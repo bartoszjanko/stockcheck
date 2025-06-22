@@ -3,7 +3,6 @@ from flask import abort
 from flask_login import current_user
 
 def admin_required(f):
-    from functools import wraps
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if not current_user.is_authenticated or current_user.role != "admin":

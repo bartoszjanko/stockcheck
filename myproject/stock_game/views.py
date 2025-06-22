@@ -30,6 +30,15 @@ from myproject.auth.models import User
 
 from . import stock_game
 
+# Importy bibliotek i modeli oraz utworzenie blueprinta stock_game
+
+# Widok kupna akcji: obsługuje formularz zakupu, przelicza koszt, waliduje i realizuje transakcję kupna
+# - Pobiera listę spółek i ich tickery
+# - Tworzy obiekty pozycji i portfela
+# - Obsługuje przeliczenie kosztu i zakup (POST)
+# - Blokuje kupno, jeśli rynek zamknięty
+# - Przekazuje dane do szablonu buy.html
+
 @stock_game.route('/buy', methods=['GET', 'POST'])
 @login_required
 def buy():
@@ -74,8 +83,8 @@ def buy():
                 return redirect(url_for('stock_game.buy'))
             success, msg = execute_buy(db_portfolio, ticker, shares, price, company)
             if success:
-                flash('Zakupiono akcje!')
-                return redirect(url_for('stock_game.portfolio'))
+                flash(msg)
+                return redirect(url_for('stock_game.buy'))
             else:
                 flash(msg)
                 return redirect(url_for('stock_game.buy'))
@@ -91,6 +100,12 @@ def buy():
         calc_cost=calc_cost,
         market_open=market_open
     )
+
+# Widok sprzedaży akcji: obsługuje formularz sprzedaży, waliduje i realizuje transakcję sprzedaży
+# - Pobiera pozycje użytkownika i dostępne tickery
+# - Obsługuje sprzedaż (POST), waliduje liczbę akcji i cenę
+# - Blokuje sprzedaż, jeśli rynek zamknięty
+# - Przekazuje dane do szablonu sell.html
 
 @stock_game.route('/sell', methods=['GET', 'POST'])
 @login_required
@@ -109,24 +124,25 @@ def sell():
         ticker = request.form.get('ticker')
         shares = int(request.form.get('shares'))
         price = get_latest_price(ticker)
-        position = GamePosition.query.filter_by(portfolio_id=db_portfolio.id, ticker=ticker).first()
-        valid, msg = validate_sell(db_portfolio, ticker, shares, position)
+        valid, msg = validate_sell(db_portfolio, ticker, shares)
         if price is None:
             flash('Nie udało się pobrać ceny dla podanego tickera.')
             return redirect(url_for('stock_game.sell'))
         if not valid:
             flash(msg)
             return redirect(url_for('stock_game.sell'))
-        success, msg = execute_sell(db_portfolio, ticker, shares, price, position)
-        if not success:
-            flash(msg)
+        success, msg = execute_sell(db_portfolio, ticker, shares, price)
+        flash(msg)
+        if success:
             return redirect(url_for('stock_game.sell'))
-        sale_success = True
-        db_positions = GamePosition.query.filter_by(portfolio_id=db_portfolio.id).all()
-        companies = Company.query.filter(Company.ticker.in_([p.ticker for p in db_positions])).all()
-        tickers = [c.ticker for c in companies]
-        names = {c.ticker: c.name for c in companies}
-    return render_template('stock_game/sell.html', tickers=tickers, names=names, sale_success=sale_success, market_open=market_open)
+        return redirect(url_for('stock_game.sell'))
+    return render_template('stock_game/sell.html', tickers=tickers, names=names, market_open=market_open)
+
+# Widok portfela: prezentuje aktualny stan portfela użytkownika
+# - Pobiera nazwy spółek, pozycje, ceny, agreguje dane
+# - Oblicza wartości pozycji, sumę portfela, zysk/stratę
+# - Generuje dane do wykresu kołowego
+# - Przekazuje wszystko do szablonu portfolio.html
 
 @stock_game.route('/portfolio')
 @login_required
@@ -168,6 +184,10 @@ def portfolio():
         total_profit_percent=total_profit_percent
     )
 
+# Widok historii transakcji: prezentuje historię operacji użytkownika
+# - Pobiera transakcje z bazy
+# - Przekazuje do szablonu history.html
+
 @stock_game.route('/history')
 @login_required
 def history():
@@ -175,6 +195,10 @@ def history():
     db_portfolio = current_user.portfolio
     transactions = get_transactions(db_portfolio.id)
     return render_template('stock_game/history.html', transactions=transactions, names=names)
+
+# Widok rankingu: prezentuje ranking użytkowników wg wartości portfela
+# - Pobiera ranking z serwisu
+# - Przekazuje do szablonu ranking.html
 
 @stock_game.route('/ranking')
 @login_required

@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Kup akcje</h2>
+<h2 class="d-flex align-items-center justify-content-between">
+  Kup akcje
+  <a href="{{ url_for('stock_game.sell') }}" class="btn btn-outline-danger btn-sm ms-3">Przejdź do sprzedaży</a>
+</h2>
 <div class="mb-3">
     <div class="alert alert-info mb-2 p-2">
         <b>Wolne środki:</b> {{ '%.2f' % cash }} zł<br>
@@ -10,6 +13,13 @@
 {% if not market_open %}
 <div class="alert alert-warning mt-3">Rynek jest zamknięty. Kupno możliwe tylko w godzinach 9:00-17:00 (poniedziałek-piątek).</div>
 {% endif %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 <form method="post">
     <div class="form-group">
         <label for="ticker">Spółka:</label>

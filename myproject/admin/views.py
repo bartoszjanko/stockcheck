@@ -1,5 +1,4 @@
-
-from flask import render_template, Blueprint
+from flask import render_template
 from myproject.admin.decorators import admin_required
 from myproject import db
 

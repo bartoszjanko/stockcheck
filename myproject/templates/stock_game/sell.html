@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Sprzedaj akcje</h2>
-{% if sale_success %}
-<div class="alert alert-success">Akcje zostały sprzedane!</div>
-{% endif %}
+<h2 class="d-flex align-items-center justify-content-between">
+  Sprzedaj akcje
+  <a href="{{ url_for('stock_game.buy') }}" class="btn btn-outline-success btn-sm ms-3">Przejdź do kupna</a>
+</h2>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 {% if not market_open %}
 <div class="alert alert-warning mt-3">Rynek jest zamknięty. Sprzedaż możliwa tylko w godzinach 9:00-17:00 (poniedziałek-piątek).</div>
 {% endif %}

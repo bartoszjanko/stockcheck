@@ -1,11 +1,11 @@
 """
-Services module for the stock trading game.
+Moduł serwisów do gry giełdowej.
 
-This module provides helper functions for the stock trading game, including:
-- Stock price fetching from Stooq
-- Portfolio management (buying, selling, calculating positions and profit)
-- Transaction processing
-- User ranking calculations
+Ten moduł dostarcza funkcje pomocnicze do gry giełdowej, w tym:
+- Pobieranie cen akcji ze Stooq
+- Zarządzanie portfelem (kupno, sprzedaż, obliczanie pozycji i zysku)
+- Przetwarzanie transakcji
+- Obliczanie rankingu użytkowników
 """
 
 import pandas as pd
@@ -21,13 +21,13 @@ import pytz
 
 def get_latest_price(ticker):
     """
-    Fetches the latest stock price from Stooq.
+    Pobiera najnowszą cenę akcji z serwisu Stooq.
     
-    Args:
-        ticker (str): The stock ticker symbol.
+    Argumenty:
+        ticker (str): Symbol giełdowy akcji.
         
-    Returns:
-        float or None: The latest closing price for the given ticker, or None if fetching fails.
+    Zwraca:
+        float lub None: Najnowsza cena zamknięcia dla danego tickera lub None, jeśli pobranie się nie powiodło.
     """
     url = f"https://stooq.pl/q/d/l/?s={ticker.lower()}&i=d"
     try:
@@ -44,13 +44,13 @@ def get_latest_price(ticker):
 
 def get_prices_for_positions(positions):
     """
-    Fetches the latest prices for a list of positions.
+    Pobiera najnowsze ceny dla listy pozycji.
     
-    Args:
-        positions (list): List of Position objects containing ticker attributes.
+    Argumenty:
+        positions (list): Lista obiektów Position zawierających atrybut ticker.
         
-    Returns:
-        dict: Dictionary mapping ticker symbols to their latest prices.
+    Zwraca:
+        dict: Słownik mapujący tickery na ich najnowsze ceny.
     """
     prices = {}
     for pos in positions:
@@ -59,16 +59,16 @@ def get_prices_for_positions(positions):
 
 def aggregate_positions(open_positions):
     """
-    Aggregates positions by ticker symbol.
+    Agreguje pozycje według symbolu tickera.
     
-    Args:
-        open_positions (list): List of position objects to aggregate.
+    Argumenty:
+        open_positions (list): Lista pozycji do agregacji.
         
-    Returns:
-        dict: Dictionary of aggregated positions keyed by ticker symbols, with each value containing:
-            - shares: Total number of shares
-            - positions: List of position objects
-            - buy_dates: List of buy dates for all positions
+    Zwraca:
+        dict: Słownik zagregowanych pozycji według tickerów, gdzie każda wartość zawiera:
+            - shares: Łączna liczba akcji
+            - positions: Lista obiektów pozycji
+            - buy_dates: Lista dat zakupu wszystkich pozycji
     """
     agg = defaultdict(lambda: {'shares': 0, 'positions': [], 'buy_dates': []})
     for pos in open_positions:
@@ -79,17 +79,16 @@ def aggregate_positions(open_positions):
 
 def calculate_avg_buy_prices(portfolio_id, agg):
     """
-    Calculates average buy prices for tickers based on all buy transactions, considering only shares currently held.
+    Oblicza średnie ceny zakupu dla tickerów na podstawie wszystkich transakcji kupna, uwzględniając tylko aktualnie posiadane akcje.
     
-    Uses the FIFO (First In, First Out) method to determine which purchase transactions correspond to the
-    current holdings after accounting for sales.
+    Używa metody FIFO (First In, First Out), aby określić, które transakcje kupna odpowiadają obecnym pozycjom po uwzględnieniu sprzedaży.
     
-    Args:
-        portfolio_id (int): ID of the portfolio to calculate average prices for
-        agg (dict): Dictionary of aggregated positions returned by aggregate_positions()
+    Argumenty:
+        portfolio_id (int): ID portfela do obliczenia średnich cen
+        agg (dict): Słownik zagregowanych pozycji zwrócony przez aggregate_positions()
         
-    Returns:
-        dict: Dictionary mapping ticker symbols to their average purchase prices
+    Zwraca:
+        dict: Słownik mapujący tickery na ich średnie ceny zakupu
     """
     avg_buy_prices = {}
     for ticker, data in agg.items():
@@ -129,15 +128,15 @@ def calculate_avg_buy_prices(portfolio_id, agg):
 
 def calculate_positions_with_prices(agg, avg_buy_prices, prices):
     """
-    Calculates positions with current prices and profit percentages.
+    Oblicza pozycje z aktualnymi cenami i procentowym zyskiem.
     
-    Args:
-        agg (dict): Dictionary of aggregated positions returned by aggregate_positions()
-        avg_buy_prices (dict): Dictionary mapping tickers to average purchase prices
-        prices (dict): Dictionary mapping tickers to current market prices
+    Argumenty:
+        agg (dict): Słownik zagregowanych pozycji zwrócony przez aggregate_positions()
+        avg_buy_prices (dict): Słownik mapujący tickery na średnie ceny zakupu
+        prices (dict): Słownik mapujący tickery na aktualne ceny rynkowe
         
-    Returns:
-        list: List of Position objects with calculated values (current value and profit percentages)
+    Zwraca:
+        list: Lista obiektów Position z obliczonymi wartościami (aktualna wartość i procentowy zysk)
     """
     positions = []
     for ticker, data in agg.items():
@@ -148,8 +147,8 @@ def calculate_positions_with_prices(agg, avg_buy_prices, prices):
             current_price = 0
         value = shares * current_price
         profit_percent = ((current_price - avg_price) / avg_price * 100) if avg_price and avg_price > 0 else 0.0
-        
-        # Tworzenie obiektu Position zamiast słownika
+        profit_value = (current_price - avg_price) * shares if avg_price and avg_price > 0 else 0.0
+
         position = Position(
             ticker=ticker,
             shares=shares,
@@ -158,24 +157,25 @@ def calculate_positions_with_prices(agg, avg_buy_prices, prices):
             value=value,
             profit_pct=profit_percent
         )
+        position.profit_value = profit_value  # kwotowy zysk/strata
         positions.append(position)
     return positions
 
 def validate_buy(portfolio, ticker, shares, price, company):
     """
-    Validates if a buy transaction can be executed.
+    Waliduje, czy transakcja kupna może zostać wykonana.
     
-    Args:
-        portfolio (GamePortfolio): Portfolio object trying to make the purchase
-        ticker (str): Stock ticker symbol
-        shares (int): Number of shares to buy
-        price (float): Current price per share
-        company (Company): Company object associated with the ticker
+    Argumenty:
+        portfolio (GamePortfolio): Obiekt portfela próbujący dokonać zakupu
+        ticker (str): Symbol giełdowy akcji
+        shares (int): Liczba akcji do kupienia
+        price (float): Aktualna cena za akcję
+        company (Company): Obiekt spółki powiązany z tickerem
         
-    Returns:
-        tuple: (is_valid, error_message) where:
-            - is_valid (bool): True if transaction is valid, False otherwise
-            - error_message (str): Empty string if valid, otherwise contains error message
+    Zwraca:
+        tuple: (is_valid, error_message), gdzie:
+            - is_valid (bool): True jeśli transakcja jest poprawna, False w przeciwnym razie
+            - error_message (str): Pusty string jeśli poprawna, w przeciwnym razie komunikat błędu
     """
     if not ticker or not company:
         return False, "Nie wybrano poprawnej spółki."
@@ -188,19 +188,19 @@ def validate_buy(portfolio, ticker, shares, price, company):
 
 def execute_buy(portfolio, ticker, shares, price, company):
     """
-    Executes a buy transaction with error handling and database transaction management.
+    Wykonuje transakcję kupna z obsługą błędów i zarządzaniem transakcją w bazie danych.
     
-    Args:
-        portfolio (GamePortfolio): Portfolio object making the purchase
-        ticker (str): Stock ticker symbol
-        shares (int): Number of shares to buy
-        price (float): Current price per share
-        company (Company): Company object associated with the ticker
+    Argumenty:
+        portfolio (GamePortfolio): Obiekt portfela dokonujący zakupu
+        ticker (str): Symbol giełdowy akcji
+        shares (int): Liczba akcji do kupienia
+        price (float): Aktualna cena za akcję
+        company (Company): Obiekt spółki powiązany z tickerem
         
-    Returns:
-        tuple: (success, message) where:
-            - success (bool): True if transaction succeeded, False otherwise
-            - message (str): Success or error message
+    Zwraca:
+        tuple: (success, message), gdzie:
+            - success (bool): True jeśli transakcja się powiodła, False w przeciwnym razie
+            - message (str): Komunikat sukcesu lub błędu
     """
     try:
         company_id = company.id if company else None
@@ -231,49 +231,40 @@ def execute_buy(portfolio, ticker, shares, price, company):
         print(f"Błąd podczas realizacji zakupu: {str(e)}")
         return False, "Wystąpił błąd podczas wykonywania transakcji."
 
-def validate_sell(portfolio, ticker, shares, position):
+def validate_sell(portfolio, ticker, shares, position=None):
     """
-    Validates if a sell transaction can be executed.
-    
-    Args:
-        portfolio (GamePortfolio): Portfolio object trying to make the sale
-        ticker (str): Stock ticker symbol
-        shares (int): Number of shares to sell
-        position (GamePosition): Position object representing the shares to be sold
-        
-    Returns:
-        tuple: (is_valid, error_message) where:
-            - is_valid (bool): True if transaction is valid, False otherwise
-            - error_message (str): Empty string if valid, otherwise contains error message
+    Waliduje, czy transakcja sprzedaży może zostać wykonana dla sumy wszystkich pozycji.
     """
-    if not ticker or not position:
+    if not ticker:
         return False, "Nie wybrano poprawnej spółki."
     if shares <= 0:
         return False, "Liczba akcji musi być większa od zera."
-    if position.shares < shares:
+    all_positions = GamePosition.query.filter_by(portfolio_id=portfolio.id, ticker=ticker, closed=False).all()
+    total_shares = sum(p.shares for p in all_positions)
+    if total_shares < shares:
         return False, "Brak wystarczającej liczby akcji do sprzedaży."
     return True, ""
 
-def execute_sell(portfolio, ticker, shares, price, position):
+
+def execute_sell(portfolio, ticker, shares, price, position=None):
     """
-    Executes a sell transaction with error handling and database transaction management.
-    
-    Args:
-        portfolio (GamePortfolio): Portfolio object making the sale
-        ticker (str): Stock ticker symbol
-        shares (int): Number of shares to sell
-        price (float): Current price per share
-        position (GamePosition): Position object representing the shares to be sold
-        
-    Returns:
-        tuple: (success, message) where:
-            - success (bool): True if transaction succeeded, False otherwise
-            - message (str): Success or error message
+    Sprzedaje akcje z wielu pozycji (FIFO) aż do wyczerpania żądanej liczby akcji.
     """
     try:
-        position.shares -= shares
-        if position.shares == 0:
-            db.session.delete(position)
+        positions = GamePosition.query.filter_by(portfolio_id=portfolio.id, ticker=ticker, closed=False).order_by(GamePosition.buy_date.asc()).all()
+        shares_to_sell = shares
+        company_id = None
+        for pos in positions:
+            if shares_to_sell <= 0:
+                break
+            if company_id is None and pos.company_id is not None:
+                company_id = pos.company_id
+            if pos.shares <= shares_to_sell:
+                shares_to_sell -= pos.shares
+                db.session.delete(pos)
+            else:
+                pos.shares -= shares_to_sell
+                shares_to_sell = 0
         portfolio.cash += price * shares
         transaction = GameTransaction(
             portfolio_id=portfolio.id,
@@ -282,7 +273,7 @@ def execute_sell(portfolio, ticker, shares, price, position):
             price=price,
             date=datetime.now(),
             type='sell',
-            company_id=position.company_id
+            company_id=company_id
         )
         db.session.add(transaction)
         db.session.commit()
@@ -294,13 +285,13 @@ def execute_sell(portfolio, ticker, shares, price, position):
 
 def get_or_create_portfolio(user_id):
     """
-    Retrieves an existing portfolio for a user, or creates a new one if it doesn't exist.
+    Pobiera istniejący portfel użytkownika lub tworzy nowy, jeśli nie istnieje.
     
-    Args:
-        user_id (int): ID of the user to get/create portfolio for
+    Argumenty:
+        user_id (int): ID użytkownika, dla którego pobierany/tworzony jest portfel
         
-    Returns:
-        GamePortfolio: The retrieved or newly created portfolio object
+    Zwraca:
+        GamePortfolio: Znaleziony lub nowo utworzony obiekt portfela
     """
     portfolio = GamePortfolio.query.filter_by(user_id=user_id).first()
     if not portfolio:
@@ -311,35 +302,35 @@ def get_or_create_portfolio(user_id):
 
 def get_company_names():
     """
-    Retrieves all company names mapped to their ticker symbols.
+    Pobiera wszystkie nazwy spółek mapowane na ich tickery.
     
-    Returns:
-        dict: Dictionary mapping ticker symbols to company names, sorted alphabetically by name
+    Zwraca:
+        dict: Słownik mapujący tickery na nazwy spółek, posortowany alfabetycznie po nazwie
     """
     companies = Company.query.order_by(Company.name).all()
     return {c.ticker: c.name for c in companies}
 
 def get_open_positions(portfolio_id):
     """
-    Retrieves all open positions for a given portfolio.
+    Pobiera wszystkie otwarte pozycje dla danego portfela.
     
-    Args:
-        portfolio_id (int): ID of the portfolio to get positions for
+    Argumenty:
+        portfolio_id (int): ID portfela, dla którego pobierane są pozycje
         
-    Returns:
-        list: List of GamePosition objects that are currently open (not closed)
+    Zwraca:
+        list: Lista obiektów GamePosition, które są obecnie otwarte (niezamknięte)
     """
     db_positions = GamePosition.query.filter_by(portfolio_id=portfolio_id, closed=False).all()
     return [p for p in db_positions if not p.closed]
 
 def close_deleted_company_positions(portfolio_id):
     """
-    Closes positions that no longer have an associated company (deleted companies).
+    Zamyka pozycje, które nie mają już powiązanej spółki (usunięte spółki).
     
-    Args:
-        portfolio_id (int): ID of the portfolio to check for deleted company positions
+    Argumenty:
+        portfolio_id (int): ID portfela do sprawdzenia pozycji z usuniętymi spółkami
         
-    Returns:
+    Zwraca:
         None
     """
     db_positions = GamePosition.query.filter_by(portfolio_id=portfolio_id, closed=False).all()
@@ -353,26 +344,26 @@ def close_deleted_company_positions(portfolio_id):
 
 def get_transactions(portfolio_id):
     """
-    Retrieves all transactions for a given portfolio, ordered by date (newest first).
+    Pobiera wszystkie transakcje dla danego portfela, posortowane od najnowszych.
     
-    Args:
-        portfolio_id (int): ID of the portfolio to get transactions for
+    Argumenty:
+        portfolio_id (int): ID portfela, dla którego pobierane są transakcje
         
-    Returns:
-        list: List of GameTransaction objects for the specified portfolio
+    Zwraca:
+        list: Lista obiektów GameTransaction dla danego portfela
     """
     return GameTransaction.query.filter_by(portfolio_id=portfolio_id).order_by(GameTransaction.date.desc()).all()
 
 def get_ranking_list():
     """
-    Generates a player ranking based on the value of their portfolios.
+    Generuje ranking graczy na podstawie wartości ich portfeli.
     
-    Calculates the total value (cash + positions) for each player's portfolio
-    and returns a sorted list with usernames and total values.
+    Oblicza całkowitą wartość (gotówka + pozycje) dla każdego portfela gracza
+    i zwraca posortowaną listę z nazwami użytkowników i wartościami portfeli.
     
-    Returns:
-        list: List of dictionaries with 'username' and 'total' (portfolio value) keys,
-              sorted in descending order by total value
+    Zwraca:
+        list: Lista słowników z kluczami 'username' i 'total' (wartość portfela),
+              posortowana malejąco po wartości portfela
     """
     portfolios = GamePortfolio.query.all()
     ranking_list = []
@@ -400,19 +391,19 @@ def get_ranking_list():
 
 def calculate_portfolio_profit(positions, avg_buy_prices):
     """
-    Calculates the total profit/loss for a portfolio.
+    Oblicza łączny zysk/stratę portfela.
     
-    Computes both the absolute profit/loss value and the percentage return
-    based on the current position values and their average purchase prices.
+    Wylicza zarówno wartość bezwzględną zysku/straty, jak i procentowy zwrot
+    na podstawie aktualnych wartości pozycji i ich średnich cen zakupu.
     
-    Args:
-        positions (list): List of Position objects with current values
-        avg_buy_prices (dict): Dictionary mapping tickers to average purchase prices
+    Argumenty:
+        positions (list): Lista obiektów Position z aktualnymi wartościami
+        avg_buy_prices (dict): Słownik mapujący tickery na średnie ceny zakupu
         
-    Returns:
-        tuple: (total_profit, total_profit_percent) where:
-            - total_profit (float): Absolute profit/loss value in currency
-            - total_profit_percent (float): Percentage profit/loss relative to cost
+    Zwraca:
+        tuple: (total_profit, total_profit_percent), gdzie:
+            - total_profit (float): Bezwzględna wartość zysku/straty w walucie
+            - total_profit_percent (float): Procentowy zysk/strata względem kosztu
     """
     total_profit = 0.0
     total_cost = 0.0
@@ -426,13 +417,13 @@ def calculate_portfolio_profit(positions, avg_buy_prices):
 
 def is_market_open(now=None):
     """
-    Checks if the Polish stock market is open (Monday-Friday, 9:00-17:00), excluding official holidays (hardcoded for 2025).
+    Sprawdza, czy polska giełda jest otwarta (poniedziałek-piątek, 9:00-17:00), z wyłączeniem oficjalnych świąt (na sztywno dla 2025).
     
-    Args:
-        now (datetime, optional): Datetime to check. Defaults to current time.
+    Argumenty:
+        now (datetime, opcjonalnie): Data i godzina do sprawdzenia. Domyślnie bierze aktualny czas.
         
-    Returns:
-        bool: True if market is open, False otherwise.
+    Zwraca:
+        bool: True jeśli giełda jest otwarta, False w przeciwnym razie.
     """
     tz = pytz.timezone('Europe/Warsaw')
     if now is None:

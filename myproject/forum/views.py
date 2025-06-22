@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, flash, Blueprint
+from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from myproject.forum.models import Post, Comment
 from myproject.forum.forms import PostForm, CommentForm
@@ -56,7 +56,6 @@ def post_detail(post_id):
         db.session.commit()
         return redirect(url_for('forum.post_detail', post_id=post.id))
     return render_template('forum/post_detail.html', post=post, form=form)
-
 
 @forum.route('/forum/post/<int:post_id>/delete', methods=['POST'])
 @login_required
