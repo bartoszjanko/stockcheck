@@ -3,7 +3,6 @@ W pliku domain.py znajdują się klasy domenowe gry giełdowej, które odpowiada
 Te klasy nie są powiązane bezpośrednio z bazą danych – służą do operacji i obliczeń w kodzie aplikacji.
 Te klasy pozwalają na wygodne operowanie portfelem i pozycjami w kodzie gry giełdowej: 
 liczenie wartości, zysku, dodawanie i usuwanie pozycji – niezależnie od sposobu przechowywania danych w bazie. 
-To czysta logika biznesowa, zgodna z zasadami programowania obiektowego.
 
 """
 

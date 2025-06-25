@@ -1,11 +1,11 @@
 from myproject import create_app, db
 from myproject.scrape_import_reports import update_reports
 from myproject.scrape_import_recommendations import update_recommendations
+from sqlalchemy import inspect
 
 app = create_app()
 
 with app.app_context():
-    # Nie uruchamiaj update_reports() ani importów jeśli nie ma jeszcze tabel
     from sqlalchemy import inspect
     inspector = inspect(db.engine)
     tables = inspector.get_table_names()

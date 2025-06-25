@@ -430,7 +430,6 @@ def is_market_open(now=None):
         now = datetime.now(tz)
     else:
         now = now.astimezone(tz)
-    # Hardcoded Polish stock market holidays for 2025
     holidays_2025 = set([
         date(2025, 1, 1),   # Nowy Rok
         date(2025, 1, 6),   # Trzech Króli
@@ -445,7 +444,6 @@ def is_market_open(now=None):
         date(2025, 12, 26), # Drugi dzień świąt
         date(2025, 12, 31), # Sylwester
     ])
-    # Check if today is a weekend or holiday
     if now.weekday() >= 5 or (now.year == 2025 and now.date() in holidays_2025):
         return False
     market_open = time(9, 0)
